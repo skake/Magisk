@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.topjohnwu.magisk.ui.home.HomeFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.topjohnwu.magisk.ui.home.HomeViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppBarLayoutTheme"
+            app:elevation="0dp">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                app:contentScrim="@android:color/white"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_collapseMode="pin"
+                    android:layout_marginTop="?attr/actionBarSize"
+                    android:padding="@dimen/margin_generic">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/home_magisk"
+                        style="@style/Widget.MaterialComponents.CardView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/margin_generic_half"
+                        app:cardBackgroundColor="@color/colorPrimary"
+                        app:cardElevation="0dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/home_manager"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:strokeColor="@color/colorCardStroke"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/margin_generic_half">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/Widget.Text.Emphasize.Inverse"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:text="Magisk is up-to-date"
+                                android:textColor="@color/colorTextTinted"
+                                android:textStyle="normal" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/Widget.Text.Caption"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:alpha=".4"
+                                android:text="Installed: v18.1 (18100)"
+                                android:textColor="@color/colorTextTinted" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/Widget.Button.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:alpha=".4"
+                        android:text="Install"
+                        android:textColor="@color/colorTextTinted"
+                        app:layout_constraintRight_toRightOf="@+id/home_magisk"
+                        app:layout_constraintTop_toBottomOf="@+id/home_magisk" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/home_manager"
+                        style="@style/Widget.MaterialComponents.CardView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_generic_half"
+                        app:cardBackgroundColor="@color/colorPrimary"
+                        app:cardElevation="0dp"
+                        app:layout_constraintLeft_toRightOf="@+id/home_magisk"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:strokeColor="@color/colorCardStroke"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/margin_generic_half">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/Widget.Text.Emphasize.Inverse"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="App is up-to-date"
+                                android:textColor="@color/colorTextTinted"
+                                android:textStyle="normal" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/Widget.Text.Caption"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:alpha=".4"
+                                android:text="Installed: v18.1 (18100)"
+                                android:textColor="@color/colorTextTinted" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/Widget.Text.Caption"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:alpha=".4"
+                                android:text="com.topjohnwu.magisk"
+                                android:textColor="@color/colorTextTinted" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/Widget.Button.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:alpha=".4"
+                        android:text="Install"
+                        android:textColor="@color/colorTextTinted"
+                        app:layout_constraintRight_toRightOf="@+id/home_manager"
+                        app:layout_constraintTop_toBottomOf="@+id/home_manager" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    app:layout_collapseMode="pin"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:contentInsetLeft="0dp"
+                    android:background="@color/colorPrimary"
+                    app:contentInsetStart="0dp"
+                    app:popupTheme="@style/ToolbarPopupTheme">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.Text.Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Magisk Manager"
+                            android:textColor="@color/colorTextTinted" />
+
+                    </FrameLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:text="sum content"
+                android:layout_height="wrap_content" />
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
