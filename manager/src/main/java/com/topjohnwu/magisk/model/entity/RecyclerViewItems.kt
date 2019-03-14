@@ -24,3 +24,14 @@ class LoadingRvItem(
 
     companion object : ComparableCallback<LoadingRvItem>()
 }
+
+class SupportRvItem(val item: SupportItem) : ComparableRvItem<SupportRvItem>() {
+
+    override val layoutRes: Int = R.layout.item_support
+
+    override fun contentSameAs(other: SupportRvItem): Boolean = item.contentSameAs(other.item)
+    override fun itemSameAs(other: SupportRvItem): Boolean = item.sameAs(other.item)
+
+    companion object : ComparableCallback<SupportRvItem>()
+
+}

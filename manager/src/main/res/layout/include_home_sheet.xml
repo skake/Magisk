@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.topjohnwu.magisk.ui.home.HomeViewModel" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_sheet">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/sheet_internal_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/sheet_appbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:theme="@style/AppBarLayoutTheme"
+                app:elevation="0dp">
+
+                <androidx.appcompat.widget.Toolbar
+                    onNavigationClick="@{() -> viewModel.sheetBackPressed()}"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@android:color/transparent"
+                    app:navigationIcon="@drawable/ic_back"
+                    app:popupTheme="@style/ToolbarPopupTheme"
+                    app:title="Options"
+                    app:titleTextAppearance="@style/TextAppearance.Emphasize"
+                    app:titleTextColor="@color/colorText" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/sheet_scroller"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/sheet_advanced_title"
+                        style="@style/Widget.Text.SectionTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Advanced Settings"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/sheet_advanced_encryption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_generic"
+                        android:layout_marginRight="@dimen/margin_generic"
+                        android:paddingStart="@dimen/margin_generic"
+                        android:paddingTop="@dimen/margin_generic"
+                        android:paddingEnd="@dimen/margin_generic"
+                        android:paddingBottom="@dimen/margin_generic"
+                        android:text="Preserve force encryption"
+                        app:layout_constraintTop_toBottomOf="@id/sheet_advanced_title" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/sheet_advanced_avb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_generic"
+                        android:layout_marginRight="@dimen/margin_generic"
+                        android:paddingStart="@dimen/margin_generic"
+                        android:paddingTop="@dimen/margin_generic"
+                        android:paddingEnd="@dimen/margin_generic"
+                        android:paddingBottom="@dimen/margin_generic"
+                        android:text="Preserve AVB 2.0/dm-verity"
+                        app:layout_constraintTop_toBottomOf="@+id/sheet_advanced_encryption" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/sheet_safetynet_title"
+                        style="@style/Widget.Text.SectionTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="SafetyNet"
+                        app:layout_constraintTop_toBottomOf="@id/sheet_advanced_avb" />
+
+                    <LinearLayout
+                        android:id="@+id/sheet_safetynet_cts"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_generic"
+                        android:layout_marginRight="@dimen/margin_generic"
+                        android:alpha=".3"
+                        android:gravity="center_vertical|start"
+                        android:orientation="horizontal"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/sheet_safetynet_verify"
+                        app:layout_constraintTop_toBottomOf="@+id/sheet_safetynet_title">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            style="@style/Widget.Icon"
+                            app:srcCompat="@drawable/ic_question"
+                            tools:srcCompat="@drawable/ic_done" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_generic"
+                            android:text="ctsProfile: unknown" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/sheet_safetynet_integrity"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_generic"
+                        android:layout_marginRight="@dimen/margin_generic"
+                        android:alpha=".3"
+                        android:gravity="center_vertical|start"
+                        android:orientation="horizontal"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/sheet_safetynet_verify"
+                        app:layout_constraintTop_toBottomOf="@+id/sheet_safetynet_cts">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            style="@style/Widget.Icon"
+                            app:srcCompat="@drawable/ic_question"
+                            tools:srcCompat="@drawable/ic_close" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_generic"
+                            android:text="basicIntegrity: unknown" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/sheet_safetynet_verify"
+                        style="@style/Widget.Button.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/margin_generic"
+                        android:text="Verify"
+                        app:layout_constraintBottom_toBottomOf="@+id/sheet_safetynet_integrity"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/sheet_safetynet_cts" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/sheet_support_title"
+                        style="@style/Widget.Text.SectionTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Support | Get in touch"
+                        app:layout_constraintTop_toBottomOf="@+id/sheet_safetynet_integrity" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/sheet_support_list"
+                        dividerAfterLast="@{false}"
+                        dividerColor="@{@android:color/transparent}"
+                        dividerSize="@{@dimen/margin_generic_half}"
+                        itemBinding="@{viewModel.itemBinding}"
+                        items="@{viewModel.items}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/margin_generic"
+                        android:paddingRight="@dimen/margin_generic"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@+id/sheet_support_title"
+                        tools:listitem="@layout/item_support" />
+
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/Widget.Button.Text.Iconified"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_generic"
+                        android:layout_marginTop="@dimen/margin_generic_double"
+                        android:onClick="@{() -> viewModel.uninstallPressed()}"
+                        android:text="Uninstall"
+                        app:icon="@drawable/ic_delete"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/sheet_support_list"
+                        app:layout_constraintVertical_bias="1" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </FrameLayout>
+
+</layout>

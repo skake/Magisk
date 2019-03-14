@@ -1,5 +1,5 @@
 package com.topjohnwu.magisk.ui
 
-import com.skoumal.teanity.viewmodel.TeanityViewModel
+import com.topjohnwu.magisk.ui.base.MagiskViewModel
 
-class MainViewModel : TeanityViewModel()
+class MainViewModel : MagiskViewModel()

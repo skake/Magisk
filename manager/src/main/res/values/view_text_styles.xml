@@ -43,4 +43,14 @@
         <item name="android:textAppearance">@style/TextAppearance.Caption.Inactive</item>
     </style>
 
+    <style name="Widget.Text.SectionTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">@dimen/margin_generic_double</item>
+        <item name="android:paddingBottom">@dimen/margin_generic</item>
+        <item name="android:paddingLeft">@dimen/margin_generic</item>
+        <item name="android:paddingRight">@dimen/margin_generic</item>
+        <item name="android:textAppearance">@style/TextAppearance.Caption</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
 </resources>
