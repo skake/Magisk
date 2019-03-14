@@ -54,9 +54,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ["*.jar"], dir: "libs")
-    implementation project(":net")
-    implementation project(":shared")
-    implementation project(":signing")
+    //implementation project(":net")
+    //implementation project(":shared")
+    //implementation project(":signing")
 
 
     // DEX
