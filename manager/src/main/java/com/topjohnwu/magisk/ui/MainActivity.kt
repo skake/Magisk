@@ -1,6 +1,7 @@
 package com.topjohnwu.magisk.ui
 
-import com.skoumal.teanity.viewevents.ViewEvent
+import android.os.Bundle
+import androidx.navigation.ui.setupWithNavController
 import com.topjohnwu.magisk.R
 import com.topjohnwu.magisk.databinding.ActivityMainBinding
 import com.topjohnwu.magisk.ui.base.MagiskActivity
@@ -12,5 +13,14 @@ class MainActivity : MagiskActivity<MainViewModel, ActivityMainBinding>() {
     override val viewModel: MainViewModel by viewModel()
     override val navHostId = R.id.main_nav_host
 
-    override fun onEventDispatched(event: ViewEvent) {}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        with(binding.mainBottomBar) {
+            setupWithNavController(navController)
+            //prevents nav reacting to re-press
+            setOnNavigationItemReselectedListener {}
+        }
+    }
+
 }

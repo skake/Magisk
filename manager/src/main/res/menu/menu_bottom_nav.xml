@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Home"
-        android:icon="@drawable/ic_home"/>
-    <item android:title="Log"
-        android:icon="@drawable/ic_log"/>
-    <item android:title="Superuser"
-        android:icon="@drawable/ic_superuser"/>
-    <item android:title="Modules"
-        android:icon="@drawable/ic_module"/>
-    <item android:title="Settings"
-        android:icon="@drawable/ic_settings"/>
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+    <item
+        android:id="@+id/logFragment"
+        android:icon="@drawable/ic_log"
+        android:title="Log" />
+    <item
+        android:id="@+id/superuserFragment"
+        android:icon="@drawable/ic_superuser"
+        android:title="Superuser" />
+    <item
+        android:id="@+id/moduleFragment"
+        android:icon="@drawable/ic_module"
+        android:title="Modules" />
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings" />
 
 </menu>
