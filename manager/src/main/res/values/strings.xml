@@ -15,6 +15,9 @@
 
     <string name="glance_install">Install</string>
 
+    <string name="update_current">up-to-date</string>
+    <string name="update_obsolete">obsolete</string>
+
     <!--Services-->
 
     <string name="paypal">PayPal</string>

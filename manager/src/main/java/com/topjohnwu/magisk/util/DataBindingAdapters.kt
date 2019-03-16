@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import androidx.core.view.isInvisible
 import androidx.databinding.BindingAdapter
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.request.RequestOptions
 import com.skoumal.teanity.databinding.applyTransformation
@@ -18,6 +19,7 @@ import com.skoumal.teanity.extensions.startEndToLeftRight
 import com.skoumal.teanity.extensions.toPx
 import com.skoumal.teanity.util.KItemDecoration
 import com.topjohnwu.magisk.GlideApp
+import com.topjohnwu.magisk.R
 import kotlin.math.roundToInt
 
 @BindingAdapter("url", "transformation", requireAll = false)
@@ -100,4 +102,42 @@ fun setDivider(
         .setDeco(drawable)
         .apply { showAfterLast = afterLast }
     view.addItemDecoration(decoration)
+}
+
+@BindingAdapter("invisibleTY", "invisibleTYMaxAlpha", requireAll = false)
+fun setInvisibleWithTranslationY(view: View, isInvisible: Boolean, _maxAlpha: Float) {
+    val maxAlpha = if (_maxAlpha == 0f) 1f else _maxAlpha
+    val viewHeight =
+        if (view.measuredHeight == 0)
+            view.resources.getDimension(R.dimen.supplemental_animation_height).roundToInt()
+        else view.measuredHeight
+    val maxTranslationY = -viewHeight / 2f
+
+    if (isInvisible) {
+        view.animate()
+            .translationY(maxTranslationY)
+            .alpha(0f)
+            .setInterpolator(FastOutSlowInInterpolator())
+            .setDuration(500)
+            .setListener {
+                onAnimationEnd {
+                    view.isInvisible = true
+                }
+            }
+            .start()
+    } else {
+        view.animate()
+            .translationY(0f)
+            .alpha(maxAlpha)
+            .setInterpolator(FastOutSlowInInterpolator())
+            .setDuration(500)
+            .setListener {
+                onAnimationStart {
+                    view.translationY = maxTranslationY
+                    view.isInvisible = false
+                }
+            }
+            .start()
+    }
+
 }

@@ -10,5 +10,6 @@
     <dimen name="margin_generic_eighth">2dp</dimen>
 
     <dimen name="radius_generic">8dp</dimen>
+    <dimen name="supplemental_animation_height">20dp</dimen>
 
 </resources>
