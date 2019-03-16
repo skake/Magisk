@@ -1,8 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--Toolbar-->
+
+    <string name="toolbar_magisk_title">Magisk</string>
+    <string name="toolbar_manager_title">Manager</string>
+
+    <!--Magisk-->
+
+    <string name="glance_magisk_title">Magisk is %s</string>
+    <string name="glance_magisk_installed">Installed: %s (%d)</string>
+    <string name="glance_manager_title">App is %s</string>
+    <string name="glance_manager_installed">Installed: %s (%d)</string>
+
+    <string name="glance_install">Install</string>
+
+    <!--Services-->
+
     <string name="paypal">PayPal</string>
     <string name="patreon">Patreon</string>
     <string name="twitter">Twitter</string>
     <string name="github">Github</string>
     <string name="xda">XDA</string>
+
+    <!--Generic Bool-->
+
+    <string name="unknown">unknown</string>
+    <string name="is_true">true</string>
+    <string name="is_false">false</string>
+
+    <!--Advanced Sheet-->
+
+    <string name="advanced_title">Options</string>
+
+    <string name="advanced_settings_title">Advanced Settings</string>
+    <string name="advanced_settings_encryption">Preserve force encryption</string>
+    <string name="advanced_settings_avb">Preserve AVB 2.0/dm-verity</string>
+
+    <string name="advanced_safetynet_cts_profile">ctsProfile: %s</string>
+    <string name="advanced_safetynet_basic_integrity">basicIntegrity: %s</string>
+
+    <string name="advanced_safetynet_title">SafetyNet</string>
+    <string name="advanced_safetynet_verify">Verify</string>
+
+    <string name="advanced_support_title">Support | Get in touch</string>
+
+    <string name="advanced_uninstall">Uninstall</string>
 </resources>

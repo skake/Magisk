@@ -5,6 +5,10 @@
 
     <data>
 
+        <import type="com.topjohnwu.magisk.R" />
+
+        <import type="com.topjohnwu.magisk.ui.home.HomeViewModel.SafetyNetState" />
+
         <variable
             name="viewModel"
             type="com.topjohnwu.magisk.ui.home.HomeViewModel" />
@@ -36,7 +40,7 @@
                     android:background="@android:color/transparent"
                     app:navigationIcon="@drawable/ic_back"
                     app:popupTheme="@style/ToolbarPopupTheme"
-                    app:title="Options"
+                    app:title="@string/advanced_title"
                     app:titleTextAppearance="@style/TextAppearance.Emphasize"
                     app:titleTextColor="@color/colorText" />
 
@@ -58,7 +62,7 @@
                         style="@style/Widget.Text.SectionTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Advanced Settings"
+                        android:text="@string/advanced_settings_title"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatCheckBox
@@ -67,11 +71,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_generic"
                         android:layout_marginRight="@dimen/margin_generic"
+                        android:checked="@={viewModel.isForceEncryption}"
                         android:paddingStart="@dimen/margin_generic"
                         android:paddingTop="@dimen/margin_generic"
                         android:paddingEnd="@dimen/margin_generic"
                         android:paddingBottom="@dimen/margin_generic"
-                        android:text="Preserve force encryption"
+                        android:text="@string/advanced_settings_encryption"
                         app:layout_constraintTop_toBottomOf="@id/sheet_advanced_title" />
 
                     <androidx.appcompat.widget.AppCompatCheckBox
@@ -80,11 +85,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_generic"
                         android:layout_marginRight="@dimen/margin_generic"
+                        android:checked="@={viewModel.isAVB}"
                         android:paddingStart="@dimen/margin_generic"
                         android:paddingTop="@dimen/margin_generic"
                         android:paddingEnd="@dimen/margin_generic"
                         android:paddingBottom="@dimen/margin_generic"
-                        android:text="Preserve AVB 2.0/dm-verity"
+                        android:text="@string/advanced_settings_avb"
                         app:layout_constraintTop_toBottomOf="@+id/sheet_advanced_encryption" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -92,7 +98,7 @@
                         style="@style/Widget.Text.SectionTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="SafetyNet"
+                        android:text="@string/advanced_safetynet_title"
                         app:layout_constraintTop_toBottomOf="@id/sheet_advanced_avb" />
 
                     <LinearLayout
@@ -102,6 +108,7 @@
                         android:layout_marginLeft="@dimen/margin_generic"
                         android:layout_marginRight="@dimen/margin_generic"
                         android:alpha=".3"
+                        android:animateLayoutChanges="true"
                         android:gravity="center_vertical|start"
                         android:orientation="horizontal"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -110,15 +117,16 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             style="@style/Widget.Icon"
-                            app:srcCompat="@drawable/ic_question"
-                            tools:srcCompat="@drawable/ic_done" />
+                            srcCompat="@{viewModel.safetyNetState != SafetyNetState.LOADED ? R.drawable.ic_question : (viewModel.isCTS ? R.drawable.ic_done : R.drawable.ic_close)}"
+                            tools:srcCompat="@drawable/ic_question" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/Widget.Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_generic"
-                            android:text="ctsProfile: unknown" />
+                            android:text="@{@string/advanced_safetynet_cts_profile(viewModel.safetyNetState != SafetyNetState.LOADED ? @string/unknown : (viewModel.isCTS ? @string/is_true : @string/is_false))}"
+                            tools:text="@string/advanced_safetynet_cts_profile" />
 
                     </LinearLayout>
 
@@ -129,6 +137,7 @@
                         android:layout_marginLeft="@dimen/margin_generic"
                         android:layout_marginRight="@dimen/margin_generic"
                         android:alpha=".3"
+                        android:animateLayoutChanges="true"
                         android:gravity="center_vertical|start"
                         android:orientation="horizontal"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -137,15 +146,16 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             style="@style/Widget.Icon"
-                            app:srcCompat="@drawable/ic_question"
-                            tools:srcCompat="@drawable/ic_close" />
+                            srcCompat="@{viewModel.safetyNetState != SafetyNetState.LOADED ? R.drawable.ic_question : (viewModel.isIntegrity ? R.drawable.ic_done : R.drawable.ic_close)}"
+                            tools:srcCompat="@drawable/ic_question" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/Widget.Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_generic"
-                            android:text="basicIntegrity: unknown" />
+                            android:text="@{@string/advanced_safetynet_basic_integrity(viewModel.safetyNetState != SafetyNetState.LOADED ? @string/unknown : (viewModel.isIntegrity ? @string/is_true : @string/is_false))}"
+                            tools:text="@string/advanced_safetynet_basic_integrity" />
 
                     </LinearLayout>
 
@@ -155,17 +165,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/margin_generic"
-                        android:text="Verify"
+                        invisible="@{viewModel.safetyNetState == SafetyNetState.LOADING}"
+                        android:onClick="@{() -> viewModel.verifyPressed()}"
+                        android:text="@string/advanced_safetynet_verify"
                         app:layout_constraintBottom_toBottomOf="@+id/sheet_safetynet_integrity"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/sheet_safetynet_cts" />
+
+                    <ProgressBar
+                        style="@style/Widget.Progress"
+                        gone="@{viewModel.safetyNetState != SafetyNetState.LOADING}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/sheet_safetynet_verify"
+                        app:layout_constraintLeft_toLeftOf="@+id/sheet_safetynet_verify"
+                        app:layout_constraintRight_toRightOf="@+id/sheet_safetynet_verify"
+                        app:layout_constraintTop_toTopOf="@+id/sheet_safetynet_verify" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/sheet_support_title"
                         style="@style/Widget.Text.SectionTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Support | Get in touch"
+                        android:text="@string/advanced_support_title"
                         app:layout_constraintTop_toBottomOf="@+id/sheet_safetynet_integrity" />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -192,7 +214,7 @@
                         android:layout_margin="@dimen/margin_generic"
                         android:layout_marginTop="@dimen/margin_generic_double"
                         android:onClick="@{() -> viewModel.uninstallPressed()}"
-                        android:text="Uninstall"
+                        android:text="@string/advanced_uninstall"
                         app:icon="@drawable/ic_delete"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
