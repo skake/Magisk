@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.InsetDrawable
 import android.view.View
+import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatImageView
@@ -157,5 +158,14 @@ fun setPulse(view: View, shouldPulse: Boolean) {
             duration = 1000
             interpolator = FastOutSlowInInterpolator()
         }
+        .start()
+}
+
+@BindingAdapter("alphaAnimated")
+fun setAlphaAnimated(view: View, alpha: Float) {
+    view.animate()
+        .alpha(alpha)
+        .setDuration(100)
+        .setInterpolator(LinearInterpolator())
         .start()
 }
