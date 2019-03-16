@@ -115,6 +115,7 @@
                         android:text="@{@string/glance_magisk_title(viewModel.magiskVersionUpdate ? @string/update_obsolete : @string/update_current)}"
                         android:textColor="@color/colorTextTinted"
                         android:textStyle="normal"
+                        pulse="@{viewModel.magiskVersionUpdate}"
                         tools:text="Magisk is up-to-date" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -178,6 +179,7 @@
                         style="@style/Widget.Text.Emphasize.Inverse"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        pulse="@{viewModel.appVersionUpdate}"
                         android:text="@{@string/glance_manager_title(viewModel.appVersionUpdate ? @string/update_obsolete : @string/update_current)}"
                         android:textColor="@color/colorTextTinted"
                         android:textStyle="normal"

@@ -1,5 +1,6 @@
 package com.topjohnwu.magisk.util
 
+import android.animation.ObjectAnimator
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.InsetDrawable
 import android.view.View
@@ -140,4 +141,21 @@ fun setInvisibleWithTranslationY(view: View, isInvisible: Boolean, _maxAlpha: Fl
             .start()
     }
 
+}
+
+@BindingAdapter("pulse")
+fun setPulse(view: View, shouldPulse: Boolean) {
+    if (!shouldPulse) {
+        view.clearAnimation()
+        return
+    }
+
+    ObjectAnimator.ofFloat(view, View.ALPHA, 1f, .6f)
+        .apply {
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+            duration = 1000
+            interpolator = FastOutSlowInInterpolator()
+        }
+        .start()
 }
