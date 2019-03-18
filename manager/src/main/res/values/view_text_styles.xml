@@ -43,6 +43,10 @@
         <item name="android:textAppearance">@style/TextAppearance.Caption.Inactive</item>
     </style>
 
+    <style name="Widget.Text.Caption.Inverse">
+        <item name="android:textAppearance">@style/TextAppearance.Caption.Inverse</item>
+    </style>
+
     <style name="Widget.Text.SectionTitle">
         <item name="android:textStyle">bold</item>
         <item name="android:paddingTop">@dimen/margin_generic_double</item>

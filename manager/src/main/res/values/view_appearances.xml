@@ -38,4 +38,8 @@
     <style name="TextAppearance.Caption.Inactive">
         <item name="android:textColor">@color/colorTextInactive</item>
     </style>
+
+    <style name="TextAppearance.Caption.Inverse">
+        <item name="android:textColor">@color/colorTextInverse</item>
+    </style>
 </resources>

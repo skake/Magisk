@@ -3,6 +3,7 @@ package com.topjohnwu.magisk.model.entity
 import androidx.databinding.ObservableBoolean
 import com.skoumal.teanity.databinding.ComparableRvItem
 import com.skoumal.teanity.util.ComparableCallback
+import com.skoumal.teanity.util.KObservableField
 import com.topjohnwu.magisk.R
 
 class LoadingRvItem(
@@ -33,5 +34,16 @@ class SupportRvItem(val item: SupportItem) : ComparableRvItem<SupportRvItem>() {
     override fun itemSameAs(other: SupportRvItem): Boolean = item.sameAs(other.item)
 
     companion object : ComparableCallback<SupportRvItem>()
+
+}
+
+class ModuleInstalledRvItem(val item: ModuleItem) : ComparableRvItem<ModuleInstalledRvItem>() {
+
+    override val layoutRes: Int = R.layout.item_module_installed
+
+    val isActive = KObservableField(item.isActive)
+
+    override fun contentSameAs(other: ModuleInstalledRvItem): Boolean = false
+    override fun itemSameAs(other: ModuleInstalledRvItem): Boolean = false
 
 }
