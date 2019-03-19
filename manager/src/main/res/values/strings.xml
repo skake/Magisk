@@ -49,5 +49,12 @@
     <string name="advanced_support_title">Support | Get in touch</string>
 
     <string name="advanced_uninstall">Uninstall</string>
+
+    <!--Modules-->
+
     <string name="modules_title">Modules</string>
+
+    <string name="modules_reinstall">Reinstall</string>
+    <string name="modules_uninstall">Uninstall</string>
+    <string name="modules_install">Install</string>
 </resources>

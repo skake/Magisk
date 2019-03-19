@@ -85,6 +85,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/module_icon_install"
                 style="@style/Widget.Icon"
+                tooltipText="@{@string/modules_install}"
                 android:layout_margin="@dimen/margin_generic_half"
                 android:onClick="@{() -> viewModel.installPressed(item)}"
                 app:layout_constraintBottom_toBottomOf="parent"
