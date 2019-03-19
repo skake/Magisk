@@ -47,3 +47,12 @@ class ModuleInstalledRvItem(val item: ModuleItem) : ComparableRvItem<ModuleInsta
     override fun itemSameAs(other: ModuleInstalledRvItem): Boolean = false
 
 }
+
+class ModuleRvItem(val item: ModuleItem) : ComparableRvItem<ModuleRvItem>() {
+
+    override val layoutRes: Int = R.layout.item_module
+
+    override fun contentSameAs(other: ModuleRvItem): Boolean = false
+    override fun itemSameAs(other: ModuleRvItem): Boolean = false
+
+}

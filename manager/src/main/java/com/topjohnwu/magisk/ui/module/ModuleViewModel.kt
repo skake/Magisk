@@ -5,7 +5,9 @@ import com.skoumal.teanity.util.DiffObservableList
 import com.topjohnwu.magisk.BR
 import com.topjohnwu.magisk.model.entity.ModuleInstalledRvItem
 import com.topjohnwu.magisk.model.entity.ModuleItem
+import com.topjohnwu.magisk.model.entity.ModuleRvItem
 import com.topjohnwu.magisk.ui.base.MagiskViewModel
+import com.topjohnwu.magisk.ui.events.ViewEvent
 import me.tatarka.bindingcollectionadapter2.OnItemBind
 import kotlin.random.Random
 
@@ -25,10 +27,25 @@ class ModuleViewModel : MagiskViewModel() {
         }.map { ModuleInstalledRvItem(it) }
         update(newItems)
     }
+    val itemsDownload = DiffObservableList(ComparableRvItem.callback).apply {
+        val r = Random(System.currentTimeMillis())
+        val newItems = (0..10).map {
+            ModuleItem(
+                "Super module",
+                "1.5",
+                "diareuse",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ac turpis sit amet nibh gravida elementum eu at felis. Maecenas volutpat augue diam, in dictum dui faucibus at. Donec viverra, velit vel ultricies commodo, felis libero luctus augue, sit amet molestie magna turpis eu mauris. Ut consequat, lorem et consequat placerat, est dolor mattis orci, at ultricies ligula neque vel lacus. Vivamus vitae nisl fringilla, fringilla purus at, pellentesque odio. Suspendisse at tempor sapien. Duis eu nibh in neque sodales posuere fermentum sed nisl. Nulla imperdiet, sem vitae scelerisque sodales, ante ligula volutpat mauris, non volutpat turpis nunc quis mauris. Nulla facilisi. Donec vel suscipit quam, a varius lectus.",
+                r.nextBoolean()
+            )
+        }.map { ModuleRvItem(it) }
+        update(newItems)
+    }
     val itemBinding = OnItemBind<ComparableRvItem<*>> { itemBinding, _, item ->
         item.bind(itemBinding)
         itemBinding.bindExtra(BR.viewModel, this@ModuleViewModel)
     }
+
+    fun sheetBackPressed() = ViewEvent.BACK_PRESS.publish()
 
     fun activityPressed(item: ModuleInstalledRvItem) {
         item.isActive.value = !item.isActive.value
@@ -36,5 +53,7 @@ class ModuleViewModel : MagiskViewModel() {
 
     fun reinstallPressed(item: ModuleInstalledRvItem) = Unit
     fun uninstallPressed(item: ModuleInstalledRvItem) = Unit
+    fun modulePressed(item: ModuleRvItem) = Unit
+    fun installPressed(item: ModuleRvItem) = Unit
 
 }

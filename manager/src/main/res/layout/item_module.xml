@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.topjohnwu.magisk.model.entity.ModuleRvItem" />
+
+        <variable
+            name="viewModel"
+            type="com.topjohnwu.magisk.ui.module.ModuleViewModel" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.Card.Outlined"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardPreventCornerOverlap="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:onClick="@{() -> viewModel.modulePressed(item)}"
+            android:padding="8dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/module_name"
+                style="@style/Widget.Text.Emphasize"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_generic"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:text="@{item.item.name}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="@+id/module_divider"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Some sample super uber mod" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/module_author"
+                style="@style/Widget.Text.Caption"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:alpha=".5"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:text="@{String.format(`v%s | by %s`, item.item.version, item.item.author)}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="@+id/module_name"
+                app:layout_constraintTop_toBottomOf="@+id/module_name"
+                tools:text="v1.1 | by diareuse" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/module_description"
+                style="@style/Widget.Text.Caption"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_generic_half"
+                android:lines="2"
+                android:text="@{item.item.description}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="@+id/module_name"
+                app:layout_constraintTop_toBottomOf="@+id/module_author"
+                tools:text="@tools:sample/lorem/random" />
+
+            <View
+                android:id="@+id/module_divider"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/margin_generic"
+                android:layout_marginEnd="@dimen/margin_generic"
+                android:background="@color/colorCardStrokeInverse"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/module_icon_install"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/module_icon_install"
+                style="@style/Widget.Icon"
+                android:layout_margin="@dimen/margin_generic_half"
+                android:onClick="@{() -> viewModel.installPressed(item)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_install"
+                app:tint="@color/colorText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
