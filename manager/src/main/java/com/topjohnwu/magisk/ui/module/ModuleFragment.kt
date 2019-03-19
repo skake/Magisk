@@ -63,7 +63,7 @@ class ModuleFragment : MagiskFragment<ModuleViewModel, FragmentModuleBinding>() 
 
     override fun onBackPressed(): Boolean {
         if (bottomSheet.state == BottomSheetBehavior.STATE_EXPANDED) {
-            binding.moduleSheetInclude.sheetRecycler.smoothScrollToPosition(0)
+            binding.moduleSheetInclude.sheetRecycler.scrollToPosition(0)
             bottomSheet.state = BottomSheetBehavior.STATE_COLLAPSED
             return true
         }
