@@ -22,15 +22,12 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Card.Tinted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            app:cardBackgroundColor="@color/colorPrimary"
-            app:cardElevation="0dp"
-            app:cardPreventCornerOverlap="true"
-            app:strokeColor="@color/colorCardStroke"
-            app:strokeWidth="1dp">
+            app:cardPreventCornerOverlap="true">
 
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -127,16 +124,24 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/module_icon_activity"
-            style="@style/Widget.Icon"
-            srcCompat="@{item.isActive ? R.drawable.ic_active : R.drawable.ic_inactive}"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/bg_primary_circle"
-            android:padding="0dp"
-            app:tint="@color/colorTextInverse"
-            tools:srcCompat="@drawable/ic_active" />
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_primary_circle">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/module_icon_activity"
+                style="@style/Widget.Icon"
+                alphaAnimated="@{item.isActive ? 1f : 0.14f}"
+                srcCompat="@{item.isActive ? R.drawable.ic_active : R.drawable.ic_inactive}"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:padding="0dp"
+                app:tint="@color/colorTextInverse"
+                tools:srcCompat="@drawable/ic_active" />
+
+
+        </FrameLayout>
 
     </FrameLayout>
 
