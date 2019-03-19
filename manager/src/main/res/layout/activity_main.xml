@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -31,21 +30,22 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/main_bottom_bar"
             android:layout_width="match_parent"
-            app:menu="@menu/menu_bottom_nav"
-            app:labelVisibilityMode="unlabeled"
-            app:elevation="4dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:elevation="4dp"
+            app:labelVisibilityMode="unlabeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/menu_bottom_nav" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
-            app:fabCustomSize="64dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.superuserPressed()}"
             android:tint="@android:color/white"
+            app:fabCustomSize="64dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:srcCompat="@drawable/ic_superuser"
-            android:layout_height="wrap_content" />
+            app:srcCompat="@drawable/ic_superuser" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
