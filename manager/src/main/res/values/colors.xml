@@ -6,14 +6,13 @@
 
     <color name="dividerGray">#888888</color>
 
-    <color name="colorTextInverse">@android:color/white</color>
     <color name="colorText">#1D1D1D</color>
     <color name="colorTextInactive">#6a6868</color>
 
     <color name="colorTextTinted">#FFFFFF</color>
     <color name="colorCardStroke">#2AFFFFFF</color>
-
     <color name="colorCardStrokeInverse">#2A000000</color>
 
-    <color name="colorTextSemiTransparent">#A1000000</color>
+    <color name="colorBackground">#fff</color>
+    <color name="colorTintedBackground">@color/colorPrimary</color>
 </resources>

@@ -19,8 +19,8 @@
         <item name="android:textColor">@color/colorTextInactive</item>
     </style>
 
-    <style name="TextAppearance.Emphasize.Inverse">
-        <item name="android:textColor">@color/colorTextInverse</item>
+    <style name="TextAppearance.Emphasize.Tinted">
+        <item name="android:textColor">@color/colorTextTinted</item>
     </style>
 
     <style name="TextAppearance.Title" parent="TextAppearance.AppCompat.Title">
@@ -39,7 +39,7 @@
         <item name="android:textColor">@color/colorTextInactive</item>
     </style>
 
-    <style name="TextAppearance.Caption.Inverse">
-        <item name="android:textColor">@color/colorTextInverse</item>
+    <style name="TextAppearance.Caption.Tinted">
+        <item name="android:textColor">@color/colorTextTinted</item>
     </style>
 </resources>

@@ -1,6 +1,7 @@
 package com.topjohnwu.magisk.ui.base
 
 import androidx.annotation.CallSuper
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.NavHostFragment
 import com.skoumal.teanity.view.TeanityActivity
@@ -13,6 +14,11 @@ abstract class MagiskActivity<ViewModel : TeanityViewModel, Binding : ViewDataBi
 
     protected val navHostFragment get() = supportFragmentManager.fragments.firstOrNull() as? NavHostFragment
     protected val fragments get() = navHostFragment?.childFragmentManager?.fragments.orEmpty().filterNotNull()
+
+    init {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+    }
 
     @CallSuper
     override fun onSimpleEventDispatched(event: Int) {

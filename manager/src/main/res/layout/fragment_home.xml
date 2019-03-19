@@ -47,23 +47,21 @@
                     android:padding="@dimen/margin_generic_half">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.Text.Emphasize.Inverse"
+                        style="@style/Widget.Text.Emphasize.Tinted"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="start"
                         android:text="@{@string/glance_magisk_title(viewModel.magiskVersionUpdate ? @string/update_obsolete : @string/update_current)}"
-                        android:textColor="@color/colorTextTinted"
                         android:textStyle="normal"
                         pulse="@{viewModel.magiskVersionUpdate}"
                         tools:text="Magisk is up-to-date" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.Text.Caption"
+                        style="@style/Widget.Text.Caption.Tinted"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha=".4"
                         android:text="@{@string/glance_magisk_installed(viewModel.magiskVersion, viewModel.magiskVersionCode)}"
-                        android:textColor="@color/colorTextTinted"
                         tools:text="Installed: v18.1 (18100)" />
 
                 </LinearLayout>
@@ -74,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:indeterminateTint="@color/colorTextInverse" />
+                    android:indeterminateTint="@color/colorTextTinted" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -111,31 +109,28 @@
                     android:padding="@dimen/margin_generic_half">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.Text.Emphasize.Inverse"
+                        style="@style/Widget.Text.Emphasize.Tinted"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         pulse="@{viewModel.appVersionUpdate}"
                         android:text="@{@string/glance_manager_title(viewModel.appVersionUpdate ? @string/update_obsolete : @string/update_current)}"
-                        android:textColor="@color/colorTextTinted"
                         android:textStyle="normal"
                         tools:text="App is up-to-date" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.Text.Caption"
+                        style="@style/Widget.Text.Caption.Tinted"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha=".4"
                         android:text="@{@string/glance_manager_installed(viewModel.appVersion, viewModel.appVersionCode)}"
-                        android:textColor="@color/colorTextTinted"
                         tools:text="Installed: v18.1 (18100)" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.Text.Caption"
+                        style="@style/Widget.Text.Caption.Tinted"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha=".4"
                         android:text="@{viewModel.appPackageName}"
-                        android:textColor="@color/colorTextTinted"
                         tools:text="com.topjohnwu.magisk" />
 
                 </LinearLayout>
@@ -146,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:indeterminateTint="@color/colorTextInverse" />
+                    android:indeterminateTint="@color/colorTextTinted" />
 
             </com.google.android.material.card.MaterialCardView>
 

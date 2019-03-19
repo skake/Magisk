@@ -44,7 +44,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/module_name"
-                        style="@style/Widget.Text.Emphasize.Inverse"
+                        style="@style/Widget.Text.Emphasize.Tinted"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="marquee"
@@ -60,7 +60,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/module_author"
-                        style="@style/Widget.Text.Caption.Inverse"
+                        style="@style/Widget.Text.Caption.Tinted"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:alpha=".5"
@@ -75,7 +75,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/module_description"
-                        style="@style/Widget.Text.Caption.Inverse"
+                        style="@style/Widget.Text.Caption.Tinted"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_generic_half"
@@ -107,7 +107,7 @@
                         app:layout_constraintRight_toLeftOf="@+id/module_icon_uninstall"
                         app:layout_constraintTop_toBottomOf="@+id/module_divider"
                         app:srcCompat="@drawable/ic_reinstall"
-                        app:tint="@color/colorTextInverse" />
+                        app:tint="@color/colorTextTinted" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/module_icon_uninstall"
@@ -119,7 +119,7 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/module_divider"
                         app:srcCompat="@drawable/ic_uninstall"
-                        app:tint="@color/colorTextInverse" />
+                        app:tint="@color/colorTextTinted" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -140,7 +140,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:padding="0dp"
-                app:tint="@color/colorTextInverse"
+                app:tint="@color/colorTextTinted"
                 tools:srcCompat="@drawable/ic_active" />
 
 

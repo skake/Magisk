@@ -1,20 +1,20 @@
 <resources>
 
-    <style name="BaseAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="ThemeFoundation" parent="Theme.MaterialComponents.Light.NoActionBar" />
+
+    <style name="ThemeFoundation.Colored">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme" parent="BaseAppTheme" />
+    <style name="ThemeFoundation.Colored.ExtraProps" />
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+    <style name="AppTheme" parent="ThemeFoundation.Colored.ExtraProps" />
+
+    <!--Overlays-->
 
     <style name="AppBarLayoutTheme" parent="ThemeOverlay.AppCompat.Dark" />
-
     <style name="ToolbarPopupTheme" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

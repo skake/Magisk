@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -32,6 +33,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 style="@style/Widget.Icon.Large"
                 srcCompat="@{item.item.icon}"
+                app:tint="@color/colorText"
                 android:background="@android:color/transparent"
                 tools:srcCompat="@drawable/ic_paypal" />
 

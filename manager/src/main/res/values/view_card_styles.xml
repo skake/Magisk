@@ -7,7 +7,7 @@
     </style>
 
     <style name="Widget.Card.Outlined">
-        <item name="cardBackgroundColor">@android:color/white</item>
+        <item name="cardBackgroundColor">@color/colorBackground</item>
         <item name="strokeColor">@color/colorCardStrokeInverse</item>
         <item name="strokeWidth">1dp</item>
     </style>

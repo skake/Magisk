@@ -16,7 +16,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_sheet">
+        android:background="@drawable/bg_sheet">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/sheet_internal_layout"

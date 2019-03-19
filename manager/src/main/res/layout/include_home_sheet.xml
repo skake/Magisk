@@ -18,7 +18,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_sheet">
+        android:background="@drawable/bg_sheet">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/sheet_internal_layout"
@@ -117,6 +117,7 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             style="@style/Widget.Icon"
+                            app:tint="@color/colorText"
                             srcCompat="@{viewModel.safetyNetState != SafetyNetState.LOADED ? R.drawable.ic_question : (viewModel.isCTS ? R.drawable.ic_done : R.drawable.ic_close)}"
                             tools:srcCompat="@drawable/ic_question" />
 
@@ -146,6 +147,7 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             style="@style/Widget.Icon"
+                            app:tint="@color/colorText"
                             srcCompat="@{viewModel.safetyNetState != SafetyNetState.LOADED ? R.drawable.ic_question : (viewModel.isIntegrity ? R.drawable.ic_done : R.drawable.ic_close)}"
                             tools:srcCompat="@drawable/ic_question" />
 

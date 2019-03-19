@@ -15,7 +15,7 @@
         android:name="com.topjohnwu.magisk.MyApplication"
         android:allowBackup="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar"
+        android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name="com.topjohnwu.magisk.ui.MainActivity">

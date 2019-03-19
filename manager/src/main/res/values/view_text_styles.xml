@@ -23,8 +23,8 @@
         <item name="android:textAppearance">@style/TextAppearance.Emphasize.Inactive</item>
     </style>
 
-    <style name="Widget.Text.Emphasize.Inverse">
-        <item name="android:textAppearance">@style/TextAppearance.Emphasize.Inverse</item>
+    <style name="Widget.Text.Emphasize.Tinted">
+        <item name="android:textAppearance">@style/TextAppearance.Emphasize.Tinted</item>
     </style>
 
     <style name="Widget.Text.Title">
@@ -43,8 +43,8 @@
         <item name="android:textAppearance">@style/TextAppearance.Caption.Inactive</item>
     </style>
 
-    <style name="Widget.Text.Caption.Inverse">
-        <item name="android:textAppearance">@style/TextAppearance.Caption.Inverse</item>
+    <style name="Widget.Text.Caption.Tinted">
+        <item name="android:textAppearance">@style/TextAppearance.Caption.Tinted</item>
     </style>
 
     <style name="Widget.Text.SectionTitle">
