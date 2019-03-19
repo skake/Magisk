@@ -32,6 +32,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 style="@style/Widget.Icon.Large"
                 srcCompat="@{item.item.icon}"
+                android:background="@android:color/transparent"
                 tools:srcCompat="@drawable/ic_paypal" />
 
             <androidx.appcompat.widget.AppCompatTextView
