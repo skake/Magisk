@@ -22,7 +22,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
-            style="@style/Widget.Card.Tinted"
+            style="@style/Widget.Card.Outlined.Tinted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
