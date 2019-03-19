@@ -17,125 +17,127 @@
 
     </data>
 
-    <com.google.android.material.card.MaterialCardView
+    <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:cardElevation="0dp"
-        app:strokeColor="@color/colorCardStroke"
-        app:strokeWidth="1dp">
+        android:layout_height="wrap_content">
 
-        <FrameLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardElevation="0dp"
+            app:cardPreventCornerOverlap="true"
+            app:strokeColor="@color/colorCardStroke"
+            app:strokeWidth="1dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxWidth="200dp"
-                android:minWidth="124dp">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/module_name"
-                    style="@style/Widget.Text.Emphasize.Inverse"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
-                    android:marqueeRepeatLimit="marquee_forever"
-                    android:singleLine="true"
-                    android:text="@{item.item.name}"
-                    app:layout_constraintHorizontal_bias="0"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_max="wrap"
-                    tools:text="Some sample super uber mod" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/module_author"
-                    style="@style/Widget.Text.Caption.Inverse"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:alpha=".5"
-                    android:ellipsize="marquee"
-                    android:marqueeRepeatLimit="marquee_forever"
-                    android:singleLine="true"
-                    android:text="@{String.format(`v%s | by %s`, item.item.version, item.item.author)}"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/module_name"
-                    tools:text="v1.1 | by diareuse" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/module_description"
-                    style="@style/Widget.Text.Caption.Inverse"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_generic_half"
-                    android:lines="2"
-                    android:text="@{item.item.description}"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/module_author"
-                    tools:text="@tools:sample/lorem/random" />
-
-                <View
-                    android:id="@+id/module_divider"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/margin_generic_half"
-                    android:background="@color/colorCardStroke"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/module_description" />
+                android:background="?attr/selectableItemBackground"
+                android:onClick="@{() -> viewModel.activityPressed(item)}"
+                android:padding="8dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_generic_half"
-                    android:orientation="horizontal"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/module_divider">
+                    android:maxWidth="200dp"
+                    android:minWidth="124dp">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/module_icon_activity"
-                        style="@style/Widget.Icon"
-                        srcCompat="@{item.isActive ? R.drawable.ic_active : R.drawable.ic_inactive}"
-                        android:onClick="@{() -> viewModel.activityPressed(item)}"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/module_name"
+                        style="@style/Widget.Text.Emphasize.Inverse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:text="@{item.item.name}"
+                        app:layout_constraintHorizontal_bias="0"
                         app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:tint="@color/colorTextInverse"
-                        tools:srcCompat="@drawable/ic_active" />
+                        app:layout_constraintWidth_max="wrap"
+                        tools:text="Some sample super uber mod" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/module_author"
+                        style="@style/Widget.Text.Caption.Inverse"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:alpha=".5"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:text="@{String.format(`v%s | by %s`, item.item.version, item.item.author)}"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/module_name"
+                        tools:text="v1.1 | by diareuse" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/module_description"
+                        style="@style/Widget.Text.Caption.Inverse"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_generic_half"
+                        android:lines="2"
+                        android:text="@{item.item.description}"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/module_author"
+                        tools:text="@tools:sample/lorem/random" />
+
+                    <View
+                        android:id="@+id/module_divider"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/margin_generic_half"
+                        android:background="@color/colorCardStroke"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/module_description" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/module_icon_reinstall"
                         style="@style/Widget.Icon"
+                        android:layout_marginTop="@dimen/margin_generic_half"
                         android:onClick="@{() -> viewModel.reinstallPressed(item)}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toLeftOf="@+id/module_icon_uninstall"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/module_divider"
                         app:srcCompat="@drawable/ic_reinstall"
                         app:tint="@color/colorTextInverse" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/module_icon_uninstall"
                         style="@style/Widget.Icon"
+                        android:layout_marginTop="@dimen/margin_generic_half"
                         android:onClick="@{() -> viewModel.uninstallPressed(item)}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/module_divider"
                         app:srcCompat="@drawable/ic_uninstall"
                         app:tint="@color/colorTextInverse" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
 
-        </FrameLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-    </com.google.android.material.card.MaterialCardView>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/module_icon_activity"
+            style="@style/Widget.Icon"
+            srcCompat="@{item.isActive ? R.drawable.ic_active : R.drawable.ic_inactive}"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/bg_primary_circle"
+            android:padding="0dp"
+            app:tint="@color/colorTextInverse"
+            tools:srcCompat="@drawable/ic_active" />
+
+    </FrameLayout>
 
 </layout>
