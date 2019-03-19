@@ -28,6 +28,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 dividerAfterLast="@{false}"
                 dividerColor="@{@android:color/transparent}"
+                dividerHorizontal="@{true}"
                 dividerSize="@{@dimen/margin_generic_half}"
                 itemBinding="@{viewModel.itemBinding}"
                 items="@{viewModel.items}"

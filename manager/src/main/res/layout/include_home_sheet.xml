@@ -195,6 +195,7 @@
                         dividerAfterLast="@{false}"
                         dividerColor="@{@android:color/transparent}"
                         dividerSize="@{@dimen/margin_generic_half}"
+                        dividerHorizontal="@{true}"
                         itemBinding="@{viewModel.itemBinding}"
                         items="@{viewModel.items}"
                         android:layout_width="match_parent"
