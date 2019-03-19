@@ -99,6 +99,7 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/module_icon_reinstall"
                         style="@style/Widget.Icon"
+                        android:layout_marginRight="@dimen/margin_generic_half"
                         android:layout_marginTop="@dimen/margin_generic_half"
                         android:onClick="@{() -> viewModel.reinstallPressed(item)}"
                         app:layout_constraintBottom_toBottomOf="parent"
