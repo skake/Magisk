@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:onClick="@{() -> viewModel.modulePressed(item)}"
-            android:padding="8dp">
+            android:padding="@dimen/margin_generic">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/module_name"
