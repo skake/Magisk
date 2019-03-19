@@ -116,9 +116,11 @@ dependencies {
     def vOSS = "16.0.2"
     def vTransformsGlide = "4.0.0"
     def vTransformsRecycler = "3.0.0"
+    def vSnap = "2.0"
     implementation group: "com.google.android.gms", name: "play-services-oss-licenses", version: vOSS
     implementation group: "jp.wasabeef", name: "glide-transformations", version: vTransformsGlide
     implementation group: "jp.wasabeef", name: "recyclerview-animators", version: vTransformsRecycler
+    implementation group: "com.github.rubensousa", name: "gravitysnaphelper", version: vSnap
 
     // KAPTs
     def vState = "1.4.1"

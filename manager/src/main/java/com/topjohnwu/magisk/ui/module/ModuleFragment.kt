@@ -1,7 +1,9 @@
 package com.topjohnwu.magisk.ui.module
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.topjohnwu.magisk.R
 import com.topjohnwu.magisk.databinding.FragmentModuleBinding
@@ -23,6 +25,7 @@ class ModuleFragment : MagiskFragment<ModuleViewModel, FragmentModuleBinding>() 
 
         setUpSheet()
         setUpSheetLayout()
+        setUpGlance()
     }
 
     private fun setUpSheet() {
@@ -52,6 +55,10 @@ class ModuleFragment : MagiskFragment<ModuleViewModel, FragmentModuleBinding>() 
 
             override fun onStateChanged(view: View, newState: Int) = Unit
         })
+    }
+
+    private fun setUpGlance() {
+        GravitySnapHelper(Gravity.START).attachToRecyclerView(binding.moduleGlanceInstalled)
     }
 
     override fun onBackPressed(): Boolean {

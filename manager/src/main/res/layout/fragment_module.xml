@@ -31,6 +31,7 @@
                 dividerHorizontal="@{true}"
                 dividerSize="@{@dimen/margin_generic_half}"
                 itemBinding="@{viewModel.itemBinding}"
+                android:id="@+id/module_glance_installed"
                 items="@{viewModel.items}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
