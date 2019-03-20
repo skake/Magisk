@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.topjohnwu.magisk.R" />
+
+        <variable
+            name="viewModel"
+            type="com.topjohnwu.magisk.ui.superuser.SuperuserViewModel" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_sheet">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/sheet_internal_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/sheet_appbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:theme="@style/AppBarLayoutTheme"
+                app:elevation="0dp">
+
+                <androidx.appcompat.widget.Toolbar
+                    onNavigationClick="@{() -> viewModel.sheetBackPressed()}"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@android:color/transparent"
+                    app:navigationIcon="@drawable/ic_back"
+                    app:popupTheme="@style/ToolbarPopupTheme"
+                    app:title="@string/magisk_hide_title"
+                    app:titleTextAppearance="@style/TextAppearance.Emphasize"
+                    app:titleTextColor="@color/colorText" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sheet_recycler"
+                dividerAfterLast="@{false}"
+                dividerColor="@{@android:color/transparent}"
+                dividerSize="@{@dimen/margin_generic}"
+                itemBinding="@{viewModel.itemBinding}"
+                items="@{viewModel.itemsApps}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/margin_generic_half"
+                android:paddingTop="@dimen/margin_generic"
+                android:paddingRight="@dimen/margin_generic_half"
+                android:paddingBottom="@dimen/margin_generic"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:spanCount="2"
+                tools:listitem="@layout/item_app_hide" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </FrameLayout>
+
+</layout>

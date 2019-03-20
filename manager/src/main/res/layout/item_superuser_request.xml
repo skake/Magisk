@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.topjohnwu.magisk.R" />
+
+        <variable
+            name="item"
+            type="com.topjohnwu.magisk.model.entity.SuperuserRequestRvItem" />
+
+        <variable
+            name="viewModel"
+            type="com.topjohnwu.magisk.ui.superuser.SuperuserViewModel" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Card.Outlined.Tinted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            app:cardPreventCornerOverlap="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:minWidth="160dp"
+                android:onClick="@{() -> viewModel.requestPressed(item)}"
+                android:padding="@dimen/margin_generic_half">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/hide_app_icon"
+                    style="@style/Widget.Icon.Large"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_margin="@dimen/margin_generic"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/avatars" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hide_app_title"
+                    style="@style/Widget.Text.Emphasize.Tinted"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_generic"
+                    android:ellipsize="marquee"
+                    android:gravity="center"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="@{item.item.app.name}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hide_app_icon"
+                    tools:text="Magisk Manager" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hide_app_package"
+                    style="@style/Widget.Text.Caption.Tinted"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:alpha=".5"
+                    android:ellipsize="marquee"
+                    android:gravity="center"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="@{item.item.app.packageName}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hide_app_title"
+                    tools:text="com.topjohnwu.magisk" />
+
+                <View
+                    android:id="@+id/hide_app_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/margin_generic_half"
+                    android:background="@color/colorCardStroke"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hide_app_package" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/hide_app_icon_notify"
+                    style="@style/Widget.Icon"
+                    alphaAnimated="@{item.shouldNotify ? 1f : .3f}"
+                    android:layout_marginTop="@dimen/margin_generic_half"
+                    android:layout_marginRight="@dimen/margin_generic_half"
+                    android:onClick="@{() -> viewModel.notifyPressed(item)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/hide_app_icon_debug"
+                    app:layout_constraintTop_toBottomOf="@+id/hide_app_divider"
+                    app:srcCompat="@drawable/ic_notification"
+                    app:tint="@color/colorTextTinted"
+                    tools:alpha=".3" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/hide_app_icon_debug"
+                    style="@style/Widget.Icon"
+                    alphaAnimated="@{item.shouldDebug ? 1f : .3f}"
+                    android:layout_marginTop="@dimen/margin_generic_half"
+                    android:layout_marginRight="@dimen/margin_generic_half"
+                    android:onClick="@{() -> viewModel.debugPressed(item)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/hide_app_icon_remove"
+                    app:layout_constraintTop_toBottomOf="@+id/hide_app_divider"
+                    app:srcCompat="@drawable/ic_log"
+                    app:tint="@color/colorTextTinted" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/hide_app_icon_remove"
+                    style="@style/Widget.Icon"
+                    android:layout_marginTop="@dimen/margin_generic_half"
+                    android:onClick="@{() -> viewModel.removePressed(item)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hide_app_divider"
+                    app:srcCompat="@drawable/ic_uninstall"
+                    app:tint="@color/colorTextTinted" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <FrameLayout
+            android:id="@+id/hide_app_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_primary_circle"
+            app:layout_constraintBottom_toTopOf="@+id/hide_app_icon"
+            app:layout_constraintLeft_toLeftOf="@+id/hide_app_icon"
+            app:layout_constraintRight_toLeftOf="@+id/hide_app_icon"
+            app:layout_constraintTop_toTopOf="@+id/hide_app_icon">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/Widget.Icon"
+                alphaAnimated="@{item.shouldGrantRoot ? 1f : .14f}"
+                srcCompat="@{item.shouldGrantRoot ? R.drawable.ic_active : R.drawable.ic_inactive}"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:padding="0dp"
+                app:tint="@color/colorTextTinted"
+                tools:src="@drawable/ic_active" />
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+</layout>

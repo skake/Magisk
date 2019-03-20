@@ -56,3 +56,28 @@ class ModuleRvItem(val item: ModuleItem) : ComparableRvItem<ModuleRvItem>() {
     override fun itemSameAs(other: ModuleRvItem): Boolean = false
 
 }
+
+class SuperuserRequestRvItem(val item: RootRequestItem) :
+    ComparableRvItem<SuperuserRequestRvItem>() {
+
+    override val layoutRes: Int = R.layout.item_superuser_request
+
+    val shouldDebug = KObservableField(item.debug)
+    val shouldGrantRoot = KObservableField(item.grantRoot)
+    val shouldNotify = KObservableField(item.notify)
+
+    override fun contentSameAs(other: SuperuserRequestRvItem): Boolean = false
+    override fun itemSameAs(other: SuperuserRequestRvItem): Boolean = false
+
+}
+
+class AppHideRvItem(val item: AppItem) : ComparableRvItem<AppHideRvItem>() {
+
+    override val layoutRes: Int = R.layout.item_app_hide
+
+    val shouldHide = KObservableField(item.shouldHide)
+
+    override fun contentSameAs(other: AppHideRvItem): Boolean = false
+    override fun itemSameAs(other: AppHideRvItem): Boolean = false
+
+}
