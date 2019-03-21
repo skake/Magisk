@@ -17,89 +17,97 @@
 
     </data>
 
-    <com.google.android.material.card.MaterialCardView
-        style="@style/Widget.Card.Outlined"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_generic_half"
-        android:layout_marginRight="@dimen/margin_generic_half"
-        app:cardPreventCornerOverlap="true">
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Card.Outlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="@{() -> viewModel.hidePressed(item)}"
-            android:padding="@dimen/margin_generic">
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="@dimen/margin_generic_half"
+            app:cardPreventCornerOverlap="true">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/hide_app_icon"
-                style="@style/Widget.Icon.Large"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@{item.item.icon}"
-                android:layout_margin="@dimen/margin_generic"
-                android:background="@android:color/transparent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
-
-            <FrameLayout
-                android:id="@+id/hide_app_indicator"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                alphaAnimated="@{item.shouldHide ? 1f : .14f}"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_background_circle"
-                app:layout_constraintBottom_toTopOf="@+id/hide_app_icon"
-                app:layout_constraintLeft_toLeftOf="@+id/hide_app_icon"
-                app:layout_constraintRight_toLeftOf="@+id/hide_app_icon"
-                app:layout_constraintTop_toTopOf="@+id/hide_app_icon">
+                android:background="?attr/selectableItemBackground"
+                android:onClick="@{() -> viewModel.hidePressed(item)}"
+                android:padding="@dimen/margin_generic">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    style="@style/Widget.Icon"
-                    alphaAnimated="@{item.shouldHide ? 1f : .14f}"
+                    android:id="@+id/hide_app_icon"
+                    style="@style/Widget.Icon.Large"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_margin="@dimen/margin_generic"
                     android:background="@android:color/transparent"
-                    srcCompat="@{item.shouldHide ? R.drawable.ic_active : R.drawable.ic_inactive}"
-                    app:tint="@color/colorText"
-                    tools:src="@drawable/ic_active" />
+                    android:src="@{item.item.icon}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/avatars" />
 
-            </FrameLayout>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hide_app_title"
+                    style="@style/Widget.Text.Emphasize"
+                    selected="@{viewModel.isIdling}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_generic"
+                    android:ellipsize="marquee"
+                    android:gravity="center"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="@{item.item.name}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hide_app_icon"
+                    tools:text="Magisk Manager" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/hide_app_title"
-                style="@style/Widget.Text.Emphasize"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_generic"
-                selected="@{viewModel.isIdling}"
-                android:ellipsize="marquee"
-                android:gravity="center"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:singleLine="true"
-                android:text="@{item.item.name}"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hide_app_icon"
-                tools:text="Magisk Manager" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hide_app_package"
+                    style="@style/Widget.Text.Caption.Inactive"
+                    selected="@{viewModel.isIdling}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:gravity="center"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="@{item.item.packageName}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hide_app_title"
+                    tools:text="com.topjohnwu.magisk" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/hide_app_package"
-                style="@style/Widget.Text.Caption.Inactive"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:ellipsize="marquee"
-                android:gravity="center"
-                selected="@{viewModel.isIdling}"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:singleLine="true"
-                android:text="@{item.item.packageName}"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hide_app_title"
-                tools:text="com.topjohnwu.magisk" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-    </com.google.android.material.card.MaterialCardView>
+        <FrameLayout
+            android:id="@+id/hide_app_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_background_circle">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/Widget.Icon"
+                alphaAnimated="@{item.shouldHide ? 1f : .14f}"
+                srcCompat="@{item.shouldHide ? R.drawable.ic_active : R.drawable.ic_inactive}"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="@dimen/margin_generic_half"
+                android:background="@android:color/transparent"
+                android:padding="0dp"
+                app:tint="@color/colorText"
+                tools:src="@drawable/ic_active" />
+
+        </FrameLayout>
+
+    </FrameLayout>
 
 </layout>
