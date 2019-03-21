@@ -7,6 +7,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.topjohnwu.magisk.R
 import com.topjohnwu.magisk.databinding.FragmentSuperuserBinding
 import com.topjohnwu.magisk.ui.base.MagiskFragment
+import com.topjohnwu.magisk.util.addOnGlobalLayoutListener
 import com.topjohnwu.magisk.util.setOnViewReadyListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.max
@@ -26,7 +27,7 @@ class SuperuserFragment : MagiskFragment<SuperuserViewModel, FragmentSuperuserBi
     }
 
     private fun setUpSheet() {
-        binding.superuserParent.setOnViewReadyListener {
+        binding.superuserParent.addOnGlobalLayoutListener {
             with(binding) {
                 val offset = superuserParent.measuredHeight - superuserGlance.bottom
                 bottomSheet.peekHeight = max(100, offset)

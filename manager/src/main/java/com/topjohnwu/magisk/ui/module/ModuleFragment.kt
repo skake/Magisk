@@ -8,6 +8,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.topjohnwu.magisk.R
 import com.topjohnwu.magisk.databinding.FragmentModuleBinding
 import com.topjohnwu.magisk.ui.base.MagiskFragment
+import com.topjohnwu.magisk.util.addOnGlobalLayoutListener
 import com.topjohnwu.magisk.util.setOnViewReadyListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.max
@@ -29,7 +30,7 @@ class ModuleFragment : MagiskFragment<ModuleViewModel, FragmentModuleBinding>() 
     }
 
     private fun setUpSheet() {
-        binding.homeParent.setOnViewReadyListener {
+        binding.homeParent.addOnGlobalLayoutListener {
             with(binding) {
                 val offset = homeParent.measuredHeight - moduleGlance.bottom
                 bottomSheet.peekHeight = max(100, offset)
