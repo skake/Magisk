@@ -1,7 +1,9 @@
 package com.topjohnwu.magisk.ui.superuser
 
+import android.content.pm.PackageManager
 import com.skoumal.teanity.databinding.ComparableRvItem
 import com.skoumal.teanity.util.DiffObservableList
+import com.skoumal.teanity.util.KObservableField
 import com.topjohnwu.magisk.BR
 import com.topjohnwu.magisk.model.entity.AppHideRvItem
 import com.topjohnwu.magisk.model.entity.AppItem
@@ -9,12 +11,16 @@ import com.topjohnwu.magisk.model.entity.RootRequestItem
 import com.topjohnwu.magisk.model.entity.SuperuserRequestRvItem
 import com.topjohnwu.magisk.ui.base.MagiskViewModel
 import com.topjohnwu.magisk.ui.events.ViewEvent
+import com.topjohnwu.magisk.util.findAppLabel
 import me.tatarka.bindingcollectionadapter2.OnItemBind
 import kotlin.random.Random
 
 
-class SuperuserViewModel : MagiskViewModel() {
+class SuperuserViewModel(
+    private val packageManager: PackageManager
+) : MagiskViewModel() {
 
+    val isIdling = KObservableField(true)
     val items = DiffObservableList(ComparableRvItem.callback).apply {
         val r = Random(System.currentTimeMillis())
         val newItems = (0..10).map {
@@ -22,7 +28,7 @@ class SuperuserViewModel : MagiskViewModel() {
                 AppItem(
                     "Magisk Manager",
                     "com.topjohnwu.magisk",
-                    "",
+                    null,
                     r.nextBoolean()
                 ),
                 r.nextBoolean(),
@@ -34,14 +40,18 @@ class SuperuserViewModel : MagiskViewModel() {
     }
     val itemsApps = DiffObservableList(ComparableRvItem.callback).apply {
         val r = Random(System.currentTimeMillis())
-        val newItems = (0..20).map {
-            AppItem(
-                "Magisk Manager",
-                "com.topjohnwu.magisk",
-                "",
-                r.nextBoolean()
-            )
-        }.map { AppHideRvItem(it) }
+        val newItems = packageManager.getInstalledApplications(0)
+            .filter { it.enabled }
+            .map {
+                AppItem(
+                    it.findAppLabel(packageManager),
+                    it.packageName.orEmpty(),
+                    it.loadIcon(packageManager),
+                    r.nextBoolean()
+                )
+            }
+            .sortedBy { it.name }
+            .map { AppHideRvItem(it) }
         update(newItems)
     }
     val itemBinding = OnItemBind<ComparableRvItem<*>> { itemBinding, _, item ->

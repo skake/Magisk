@@ -37,6 +37,7 @@
                 style="@style/Widget.Icon.Large"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
+                android:src="@{item.item.icon}"
                 android:layout_margin="@dimen/margin_generic"
                 android:background="@android:color/transparent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -57,6 +58,7 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     style="@style/Widget.Icon"
                     alphaAnimated="@{item.shouldHide ? 1f : .14f}"
+                    android:background="@android:color/transparent"
                     srcCompat="@{item.shouldHide ? R.drawable.ic_active : R.drawable.ic_inactive}"
                     app:tint="@color/colorText"
                     tools:src="@drawable/ic_active" />
@@ -69,6 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_generic"
+                selected="@{viewModel.isIdling}"
                 android:ellipsize="marquee"
                 android:gravity="center"
                 android:marqueeRepeatLimit="marquee_forever"
@@ -86,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
                 android:gravity="center"
+                selected="@{viewModel.isIdling}"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:singleLine="true"
                 android:text="@{item.item.packageName}"

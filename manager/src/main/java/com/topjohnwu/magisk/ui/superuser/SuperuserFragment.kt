@@ -1,7 +1,9 @@
 package com.topjohnwu.magisk.ui.superuser
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.topjohnwu.magisk.R
 import com.topjohnwu.magisk.databinding.FragmentSuperuserBinding
@@ -33,6 +35,7 @@ class SuperuserFragment : MagiskFragment<SuperuserViewModel, FragmentSuperuserBi
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setUpSheetLayout() {
         bottomSheet.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
 
@@ -50,6 +53,13 @@ class SuperuserFragment : MagiskFragment<SuperuserViewModel, FragmentSuperuserBi
             }
 
             override fun onStateChanged(view: View, newState: Int) = Unit
+        })
+
+        binding.superuserSheetInclude.sheetRecycler.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                viewModel.isIdling.value = newState == RecyclerView.SCROLL_STATE_IDLE
+            }
         })
     }
 }

@@ -15,5 +15,5 @@ val viewModelModules = module {
     viewModel { LogViewModel() }
     viewModel { ModuleViewModel() }
     viewModel { SettingsViewModel() }
-    viewModel { SuperuserViewModel() }
+    viewModel { SuperuserViewModel(get()) }
 }

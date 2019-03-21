@@ -7,5 +7,6 @@ import org.koin.dsl.module.module
 val miscModule = module {
 
     single { get<Context>().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager }
+    single { get<Context>().packageManager }
 
 }
