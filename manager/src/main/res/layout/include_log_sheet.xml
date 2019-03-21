@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.topjohnwu.magisk.R" />
+
+        <variable
+            name="viewModel"
+            type="com.topjohnwu.magisk.ui.log.LogViewModel" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_sheet">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/sheet_internal_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/sheet_appbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:theme="@style/AppBarLayoutTheme"
+                app:elevation="0dp">
+
+                <androidx.appcompat.widget.Toolbar
+                    onNavigationClick="@{() -> viewModel.sheetBackPressed()}"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@android:color/transparent"
+                    app:navigationIcon="@drawable/ic_back"
+                    app:popupTheme="@style/ToolbarPopupTheme"
+                    app:title="@string/modules_title"
+                    app:titleTextAppearance="@style/TextAppearance.Emphasize"
+                    app:titleTextColor="@color/colorText" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sheet_recycler"
+                dividerAfterLast="@{false}"
+                dividerColor="@{@android:color/transparent}"
+                dividerSize="@{@dimen/margin_generic}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_generic"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            itemBinding="@{viewModel.itemBinding}"
+            items="@{viewModel.itemsDownload}"
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </FrameLayout>
+
+</layout>
