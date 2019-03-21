@@ -26,12 +26,12 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/module_glance_installed"
                 dividerAfterLast="@{false}"
                 dividerColor="@{@android:color/transparent}"
                 dividerHorizontal="@{true}"
                 dividerSize="@{@dimen/margin_generic_half}"
                 itemBinding="@{viewModel.itemBinding}"
-                android:id="@+id/module_glance_installed"
                 items="@{viewModel.items}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,6 +58,17 @@
                 viewModel="@{viewModel}" />
 
         </FrameLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/module_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_generic"
+            android:tint="@android:color/white"
+            app:fabSize="normal"
+            app:layout_anchor="@+id/module_sheet"
+            app:layout_anchorGravity="right"
+            app:srcCompat="@drawable/ic_add" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
