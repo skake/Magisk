@@ -1,6 +1,5 @@
 package com.topjohnwu.magisk.ui.superuser
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -35,7 +34,6 @@ class SuperuserFragment : MagiskFragment<SuperuserViewModel, FragmentSuperuserBi
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     private fun setUpSheetLayout() {
         bottomSheet.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
 
@@ -61,5 +59,14 @@ class SuperuserFragment : MagiskFragment<SuperuserViewModel, FragmentSuperuserBi
                 viewModel.isIdling.value = newState == RecyclerView.SCROLL_STATE_IDLE
             }
         })
+    }
+
+    override fun onBackPressed(): Boolean {
+        if (bottomSheet.state == BottomSheetBehavior.STATE_EXPANDED) {
+            binding.superuserSheetInclude.sheetRecycler.scrollToPosition(0)
+            bottomSheet.state = BottomSheetBehavior.STATE_COLLAPSED
+            return true
+        }
+        return super.onBackPressed()
     }
 }

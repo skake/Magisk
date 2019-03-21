@@ -60,6 +60,7 @@ class SuperuserViewModel(
     }
 
     fun sheetBackPressed() = ViewEvent.BACK_PRESS.publish()
+
     fun hidePressed(item: AppHideRvItem) {
         item.shouldHide.value = !item.shouldHide.value
     }
