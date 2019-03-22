@@ -24,9 +24,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
+        android:nestedScrollingEnabled="true"
         android:orientation="vertical"
-        android:paddingTop="@dimen/margin_generic"
-        android:paddingBottom="@dimen/margin_generic"
+        android:padding="@dimen/margin_generic"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_log" />
 

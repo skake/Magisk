@@ -27,7 +27,7 @@ class LogViewModel : MagiskViewModel() {
         pages.add(LogPage())
         pages.add(MagiskPage())
 
-        val logEntries = (0..10).map { LogLineRvItem() }
+        val logEntries = (0 until 5).map { LogLineRvItem() }
         val logLines = (0..10).map {
             LogRvItem().apply {
                 items.addAll(logEntries)

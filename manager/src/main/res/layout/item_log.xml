@@ -19,14 +19,13 @@
 
     <com.google.android.material.card.MaterialCardView
         style="@style/Widget.Card.Outlined"
-        isExpanded="@{item.isExpanded}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        isExpanded="@{item.isExpanded}"
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
             android:onClick="@{() -> item.toggle()}"
             android:padding="@dimen/margin_generic">
 
@@ -59,6 +58,7 @@
                 android:background="@android:color/transparent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/colorText"
                 tools:srcCompat="@drawable/ic_collapse" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -73,7 +73,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_generic"
+                android:clickable="false"
                 android:clipToPadding="false"
+                android:focusable="false"
+                android:nestedScrollingEnabled="false"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/log_item_date"
