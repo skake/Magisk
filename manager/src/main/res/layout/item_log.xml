@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.topjohnwu.magisk.R" />
+
+        <variable
+            name="item"
+            type="com.topjohnwu.magisk.model.entity.LogRvItem" />
+
+        <variable
+            name="viewModel"
+            type="com.topjohnwu.magisk.ui.log.LogViewModel" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.Card.Outlined"
+        isExpanded="@{item.isExpanded}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:onClick="@{() -> item.toggle()}"
+            android:padding="@dimen/margin_generic">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/log_item_recency"
+                style="@style/Widget.Text.Emphasize"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_generic"
+                android:text="Today"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/log_item_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/log_item_date"
+                style="@style/Widget.Text.Caption.Inactive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_generic"
+                android:text="Jan 1, 2019"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/log_item_icon"
+                app:layout_constraintTop_toBottomOf="@+id/log_item_recency" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/log_item_icon"
+                style="@style/Widget.Icon"
+                srcCompat="@{item.isExpanded ? R.drawable.ic_collapse : R.drawable.ic_expand}"
+                android:background="@android:color/transparent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/ic_collapse" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                dividerAfterLast="@{false}"
+                dividerColor="@{@color/colorCardStrokeInverse}"
+                dividerMarginEnd="@{@dimen/margin_generic}"
+                dividerMarginStart="@{@dimen/margin_generic}"
+                dividerSize="@{@dimen/divider_size}"
+                gone="@{!item.isExpanded}"
+                itemBinding="@{viewModel.itemBinding}"
+                items="@{item.items}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_generic"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/log_item_date"
+                tools:listitem="@layout/item_log_line" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>

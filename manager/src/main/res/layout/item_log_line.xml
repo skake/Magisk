@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.topjohnwu.magisk.model.entity.LogLineRvItem" />
+
+        <variable
+            name="viewModel"
+            type="com.topjohnwu.magisk.ui.log.LogViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/margin_generic_half"
+        android:paddingBottom="@dimen/margin_generic_half">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_log_line_name"
+            style="@style/Widget.Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="App name"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/item_log_line_guide_50"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Widget.Text.Caption.Inactive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Command: /system/bin/sh"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/item_log_line_guide_50"
+            app:layout_constraintTop_toBottomOf="@+id/item_log_line_name" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/item_log_line_guide_50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_log_line_state"
+            style="@style/Widget.Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Granted"
+            app:layout_constraintLeft_toLeftOf="@+id/item_log_line_guide_50"
+            app:layout_constraintRight_toLeftOf="@+id/item_log_line_time"
+            app:layout_constraintTop_toTopOf="@+id/item_log_line_name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_log_line_pid"
+            style="@style/Widget.Text.Caption.Inactive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="PID: 12345"
+            android:textSize="10sp"
+            app:layout_constraintLeft_toLeftOf="@+id/item_log_line_state"
+            app:layout_constraintRight_toRightOf="@+id/item_log_line_state"
+            app:layout_constraintTop_toBottomOf="@+id/item_log_line_state" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_log_line_target"
+            style="@style/Widget.Text.Caption.Inactive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Target UID: 12345"
+            android:textSize="10sp"
+            app:layout_constraintLeft_toLeftOf="@+id/item_log_line_state"
+            app:layout_constraintRight_toRightOf="@+id/item_log_line_state"
+            app:layout_constraintTop_toBottomOf="@+id/item_log_line_pid" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_log_line_time"
+            style="@style/Widget.Text.Caption.Inactive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="12:00AM"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

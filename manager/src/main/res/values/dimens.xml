@@ -12,4 +12,6 @@
     <dimen name="radius_generic">8dp</dimen>
     <dimen name="supplemental_animation_height">20dp</dimen>
 
+    <dimen name="divider_size">1dp</dimen>
+
 </resources>

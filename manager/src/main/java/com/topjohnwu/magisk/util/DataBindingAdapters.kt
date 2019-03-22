@@ -10,10 +10,14 @@ import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.widget.TooltipCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
+import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
+import androidx.core.view.updateLayoutParams
 import androidx.databinding.BindingAdapter
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.card.MaterialCardView
 import com.skoumal.teanity.databinding.applyTransformation
 import com.topjohnwu.magisk.GlideApp
 import com.topjohnwu.magisk.R
@@ -121,4 +125,25 @@ fun setAlphaAnimated(view: View, alpha: Float) {
         .setDuration(100)
         .setInterpolator(LinearInterpolator())
         .start()
+}
+
+@BindingAdapter("isExpanded")
+fun isExpanded(view: MaterialCardView, isExpanded: Boolean) {
+    if (isExpanded) {
+        view.strokeColor = ContextCompat.getColor(view.context, android.R.color.transparent)
+        view.strokeWidth = 0
+        view.cardElevation = view.resources.getDimension(R.dimen.margin_generic)
+        view.updateLayoutParams<RecyclerView.LayoutParams> {
+            marginStart = 0
+            marginEnd = 0
+        }
+    } else {
+        view.strokeColor = ContextCompat.getColor(view.context, R.color.colorCardStrokeInverse)
+        view.strokeWidth = view.resources.getDimension(R.dimen.divider_size).roundToInt()
+        view.cardElevation = 0f
+        view.updateLayoutParams<RecyclerView.LayoutParams> {
+            marginStart = view.resources.getDimension(R.dimen.margin_generic).roundToInt()
+            marginEnd = marginStart
+        }
+    }
 }

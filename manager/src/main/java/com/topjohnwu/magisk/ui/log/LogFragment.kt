@@ -57,7 +57,7 @@ class LogFragment : MagiskFragment<LogViewModel, FragmentLogBinding>() {
 
     override fun onBackPressed(): Boolean {
         if (bottomSheet.state == BottomSheetBehavior.STATE_EXPANDED) {
-            binding.logSheetInclude.sheetRecycler.scrollToPosition(0)
+            //binding.logSheetInclude.sheetRecycler.scrollToPosition(0)
             bottomSheet.state = BottomSheetBehavior.STATE_COLLAPSED
             return true
         }

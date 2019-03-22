@@ -1,10 +1,13 @@
 package com.topjohnwu.magisk.model.entity
 
+import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
 import com.skoumal.teanity.databinding.ComparableRvItem
 import com.skoumal.teanity.util.ComparableCallback
+import com.skoumal.teanity.util.DiffObservableList
 import com.skoumal.teanity.util.KObservableField
 import com.topjohnwu.magisk.R
+import com.topjohnwu.magisk.util.toggle
 
 class LoadingRvItem(
     val failText: String,
@@ -80,4 +83,41 @@ class AppHideRvItem(val item: AppItem) : ComparableRvItem<AppHideRvItem>() {
     override fun contentSameAs(other: AppHideRvItem): Boolean = false
     override fun itemSameAs(other: AppHideRvItem): Boolean = false
 
+}
+
+class LogPage : ComparableRvItem<LogPage>() {
+
+    val items = DiffObservableList(ComparableRvItem.callback)
+
+    override val layoutRes: Int = R.layout.page_log
+
+    override fun contentSameAs(other: LogPage): Boolean = false
+    override fun itemSameAs(other: LogPage): Boolean = false
+}
+
+class LogRvItem : ComparableRvItem<LogRvItem>() {
+    override val layoutRes: Int = R.layout.item_log
+
+    val items = ObservableArrayList<ComparableRvItem<*>>()
+    val isExpanded = KObservableField(false)
+
+    fun toggle() = isExpanded.toggle()
+
+    override fun contentSameAs(other: LogRvItem): Boolean = false
+    override fun itemSameAs(other: LogRvItem): Boolean = false
+}
+
+class LogLineRvItem : ComparableRvItem<LogLineRvItem>() {
+    override val layoutRes: Int = R.layout.item_log_line
+
+    override fun contentSameAs(other: LogLineRvItem): Boolean = false
+    override fun itemSameAs(other: LogLineRvItem): Boolean = false
+}
+
+class MagiskPage : ComparableRvItem<LogPage>() {
+
+    override val layoutRes: Int = R.layout.page_magisk
+
+    override fun contentSameAs(other: LogPage): Boolean = false
+    override fun itemSameAs(other: LogPage): Boolean = false
 }
