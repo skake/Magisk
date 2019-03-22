@@ -9,10 +9,11 @@ import com.topjohnwu.magisk.model.entity.LogRvItem
 import com.topjohnwu.magisk.model.entity.MagiskPage
 import com.topjohnwu.magisk.ui.base.MagiskViewModel
 import com.topjohnwu.magisk.ui.events.ViewEvent
+import me.tatarka.bindingcollectionadapter2.BindingViewPagerAdapter
 import me.tatarka.bindingcollectionadapter2.OnItemBind
 
 
-class LogViewModel : MagiskViewModel() {
+class LogViewModel : MagiskViewModel(), BindingViewPagerAdapter.PageTitles<ComparableRvItem<*>> {
 
     val pages = ObservableArrayList<ComparableRvItem<*>>()
     val itemBinding = OnItemBind<ComparableRvItem<*>> { itemBinding, _, item ->
@@ -35,6 +36,12 @@ class LogViewModel : MagiskViewModel() {
         }
 
         log.items.addAll(logLines)
+    }
+
+    override fun getPageTitle(position: Int, item: ComparableRvItem<*>?) = when (item) {
+        is LogPage -> "Superuser"
+        is MagiskPage -> "Magisk"
+        else -> "N/A"
     }
 
     fun sheetBackPressed() = ViewEvent.BACK_PRESS.publish()

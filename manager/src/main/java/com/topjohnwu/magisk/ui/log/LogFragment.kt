@@ -24,6 +24,7 @@ class LogFragment : MagiskFragment<LogViewModel, FragmentLogBinding>() {
 
         setUpSheet()
         setUpSheetLayout()
+        setUpGlance()
     }
 
     private fun setUpSheet() {
@@ -53,6 +54,10 @@ class LogFragment : MagiskFragment<LogViewModel, FragmentLogBinding>() {
 
             override fun onStateChanged(view: View, newState: Int) = Unit
         })
+    }
+
+    private fun setUpGlance() {
+        binding.logGlanceTabs.setupWithViewPager(binding.logSheetInclude.sheetPager)
     }
 
     override fun onBackPressed(): Boolean {

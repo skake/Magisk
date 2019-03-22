@@ -38,22 +38,11 @@
                 <com.google.android.material.tabs.TabLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/log_glance_tabs"
                     android:background="@android:color/transparent"
                     android:minWidth="250dp"
                     app:tabSelectedTextColor="@color/colorAccent"
-                    app:tabTextColor="@color/colorTextTinted">
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Superuser" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Magisk" />
-
-                </com.google.android.material.tabs.TabLayout>
+                    app:tabTextColor="@color/colorTextTinted" />
 
             </com.google.android.material.card.MaterialCardView>
 
