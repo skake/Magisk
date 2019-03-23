@@ -15,4 +15,13 @@
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
     </style>
 
+    <style name="Widget.Icon.Accent">
+        <item name="tint">@color/colorAccent</item>
+    </style>
+
+    <style name="Widget.Icon.DialogButton" parent="Widget.Icon.Accent">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>
