@@ -6,6 +6,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.NavHostFragment
 import com.skoumal.teanity.view.TeanityActivity
 import com.skoumal.teanity.viewmodel.TeanityViewModel
+import com.topjohnwu.magisk.Config
 import com.topjohnwu.magisk.ui.events.ViewEvent
 
 
@@ -17,7 +18,7 @@ abstract class MagiskActivity<ViewModel : TeanityViewModel, Binding : ViewDataBi
 
     init {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        AppCompatDelegate.setDefaultNightMode(Config.darkMode)
     }
 
     @CallSuper

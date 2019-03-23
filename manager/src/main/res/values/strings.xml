@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="magisk">Magisk</string>
+    <string name="empty" />
+    <string name="magiskhide">Magisk Hide</string>
+
     <!--Toolbar-->
 
     <string name="toolbar_magisk_title">Magisk</string>
@@ -36,7 +40,7 @@
 
     <string name="advanced_title">Options</string>
 
-    <string name="advanced_settings_title">Advanced Settings</string>
+    <!--<string name="advanced_settings_title">Advanced Settings</string>-->
     <string name="advanced_settings_encryption">Preserve force encryption</string>
     <string name="advanced_settings_avb">Preserve AVB 2.0/dm-verity</string>
 
