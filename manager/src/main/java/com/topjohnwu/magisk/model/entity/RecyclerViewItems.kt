@@ -121,3 +121,10 @@ class MagiskPage : ComparableRvItem<LogPage>() {
     override fun contentSameAs(other: LogPage): Boolean = false
     override fun itemSameAs(other: LogPage): Boolean = false
 }
+
+class ConsoleRvItem(val text: String) : ComparableRvItem<ConsoleRvItem>() {
+    override val layoutRes: Int = R.layout.item_console
+
+    override fun contentSameAs(other: ConsoleRvItem): Boolean = text == other.text
+    override fun itemSameAs(other: ConsoleRvItem): Boolean = text == other.text
+}

@@ -12,9 +12,21 @@
 
     <style name="AppTheme" parent="ThemeFoundation.Colored.ExtraProps" />
 
+    <style name="AppTheme.Flashing" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@android:color/black</item>
+        <item name="colorPrimaryDark">@android:color/black</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+
     <!--Overlays-->
 
     <style name="AppBarLayoutTheme" parent="ThemeOverlay.AppCompat.Dark" />
+
+    <style name="AppBarLayoutTheme.Flashing" parent="ThemeOverlay.AppCompat.Dark" />
+
     <style name="ToolbarPopupTheme" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ToolbarPopupTheme.Flashing" parent="ThemeOverlay.AppCompat.Dark" />
 
 </resources>

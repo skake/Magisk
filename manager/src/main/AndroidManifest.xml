@@ -26,6 +26,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.flash.FlashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Flashing" />
+
     </application>
 
 </manifest>

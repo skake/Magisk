@@ -31,4 +31,9 @@
         android:name="com.topjohnwu.magisk.ui.superuser.SuperuserFragment"
         android:label="SuperuserFragment" />
 
+    <activity
+        android:id="@+id/flashActivity"
+        android:name="com.topjohnwu.magisk.ui.flash.FlashActivity"
+        android:label="FlashActivity" />
+
 </navigation>

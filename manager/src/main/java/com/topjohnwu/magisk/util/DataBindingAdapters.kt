@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
@@ -17,6 +18,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.skoumal.teanity.databinding.applyTransformation
 import com.topjohnwu.magisk.GlideApp
 import com.topjohnwu.magisk.R
+import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
+import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 
 @BindingAdapter("url", "transformation", requireAll = false)
@@ -121,4 +125,28 @@ fun setAlphaAnimated(view: View, alpha: Float) {
         .setDuration(100)
         .setInterpolator(LinearInterpolator())
         .start()
+}
+
+@BindingAdapter("invisibleScale")
+fun setInvisibleWithScale(view: View, isInvisible: Boolean) {
+    view.animate()
+        .scaleX(if (isInvisible) 0f else 1f)
+        .scaleY(if (isInvisible) 0f else 1f)
+        .setInterpolator(FastOutSlowInInterpolator())
+        .start()
+}
+
+@BindingAdapter("movieBehavior", "movieBehaviorText")
+fun setMovieBehavior(view: TextView, isMovieBehavior: Boolean, text: String) {
+    (view.tag as? Disposable)?.dispose()
+    if (isMovieBehavior) {
+        val observer = Observable
+            .interval(150, TimeUnit.MILLISECONDS)
+            .assign {
+                onNext { view.text = text.replaceRandomWithSpecial() }
+            }
+        view.tag = observer
+    } else {
+        view.text = text
+    }
 }
