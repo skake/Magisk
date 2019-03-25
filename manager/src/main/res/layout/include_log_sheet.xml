@@ -37,7 +37,7 @@
                     android:background="@android:color/transparent"
                     app:navigationIcon="@drawable/ic_back"
                     app:popupTheme="@style/ToolbarPopupTheme"
-                    app:title="@string/modules_title"
+                    app:title="@string/logs_title"
                     app:titleTextAppearance="@style/TextAppearance.Emphasize"
                     app:titleTextColor="@color/colorText" />
 

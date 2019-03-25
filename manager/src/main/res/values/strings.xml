@@ -56,10 +56,11 @@
 
     <!--Modules-->
 
-    <string name="modules_title">Modules</string>
+    <string name="modules_title">Downloads</string>
 
     <string name="modules_reinstall">Reinstall</string>
     <string name="modules_uninstall">Uninstall</string>
     <string name="modules_install">Install</string>
     <string name="magisk_hide_title">Magisk Hide</string>
+    <string name="logs_title">Logs</string>
 </resources>
