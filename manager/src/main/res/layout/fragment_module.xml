@@ -25,6 +25,16 @@
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/module_glance_installed_title"
+                style="@style/Widget.Text.Emphasize.Tinted"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/margin_generic"
+                android:paddingRight="@dimen/margin_generic"
+                android:text="Installed Modules"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/module_glance_installed"
                 dividerAfterLast="@{false}"
@@ -40,7 +50,7 @@
                 android:padding="@dimen/margin_generic"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/module_glance_installed_title"
                 tools:listitem="@layout/item_module_installed" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
