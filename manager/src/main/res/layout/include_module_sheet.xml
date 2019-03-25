@@ -48,6 +48,7 @@
                 android:id="@+id/sheet_recycler"
                 dividerAfterLast="@{false}"
                 dividerColor="@{@android:color/transparent}"
+                android:scrollbars="none"
                 dividerSize="@{@dimen/margin_generic}"
                 itemBinding="@{viewModel.itemBinding}"
                 items="@{viewModel.itemsDownload}"

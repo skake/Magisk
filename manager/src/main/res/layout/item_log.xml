@@ -68,6 +68,7 @@
                 dividerMarginStart="@{@dimen/margin_generic}"
                 dividerSize="@{@dimen/divider_size}"
                 gone="@{!item.isExpanded}"
+                android:scrollbars="none"
                 itemBinding="@{viewModel.itemBinding}"
                 items="@{item.items}"
                 android:layout_width="match_parent"

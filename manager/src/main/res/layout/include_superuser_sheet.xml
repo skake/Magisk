@@ -50,6 +50,7 @@
                 dividerColor="@{@android:color/transparent}"
                 dividerSize="@{@dimen/margin_generic}"
                 itemBinding="@{viewModel.itemBinding}"
+                android:scrollbars="none"
                 items="@{viewModel.itemsApps}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

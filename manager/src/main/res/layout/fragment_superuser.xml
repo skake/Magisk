@@ -44,6 +44,7 @@
                 itemBinding="@{viewModel.itemBinding}"
                 items="@{viewModel.items}"
                 android:layout_width="match_parent"
+                android:scrollbars="none"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:orientation="horizontal"
