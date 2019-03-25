@@ -42,6 +42,7 @@
                     android:background="@android:color/transparent"
                     android:minWidth="250dp"
                     app:tabSelectedTextColor="@color/colorAccent"
+                    app:tabIndicatorColor="@color/colorAccent"
                     app:tabTextColor="@color/colorTextTinted" />
 
             </com.google.android.material.card.MaterialCardView>
