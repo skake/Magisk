@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase
     version = 1,
     entities = []
 )*/
-/*FIXME uncomment this if you wish to use database*/
+/*TODO wrapper over shell magisk may be possible*/
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {

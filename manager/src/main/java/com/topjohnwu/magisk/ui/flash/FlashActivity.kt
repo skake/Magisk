@@ -3,6 +3,7 @@ package com.topjohnwu.magisk.ui.flash
 import com.topjohnwu.magisk.R
 import com.topjohnwu.magisk.databinding.ActivityFlashBinding
 import com.topjohnwu.magisk.ui.base.MagiskActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class FlashActivity : MagiskActivity<FlashViewModel, ActivityFlashBinding>() {

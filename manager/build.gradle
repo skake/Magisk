@@ -124,6 +124,11 @@ dependencies {
     implementation group: "jp.wasabeef", name: "recyclerview-animators", version: vTransformsRecycler
     implementation group: "com.github.rubensousa", name: "gravitysnaphelper", version: vSnap
 
+    // SU
+    def vSU = '2.3.2'
+    implementation group: "com.github.topjohnwu.libsu", name: "core", version: vSU
+    implementation group: "com.github.topjohnwu.libsu", name: "io", version: vSU
+
     // KAPTs
     def vState = "1.4.1"
     kapt group: "com.squareup.moshi", name: "moshi-kotlin-codegen", version: vMoshi
