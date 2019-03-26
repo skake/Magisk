@@ -10,6 +10,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.skoumal.teanity.util.KObservableField
 import com.topjohnwu.magisk.BR
 import com.topjohnwu.magisk.R
@@ -53,6 +54,7 @@ class MagiskDialog @JvmOverloads constructor(
     inner class Button {
         val icon = KObservableField(0)
         val title = KObservableField<CharSequence>("")
+        val isEnabled = KObservableField(true)
 
         var onClickAction: OnDialogButtonClickListener = {}
 
@@ -77,6 +79,11 @@ class MagiskDialog @JvmOverloads constructor(
             get() = 0
             set(value) {
                 button.title.value = context.getString(value)
+            }
+        var isEnabled: Boolean
+            get() = button.isEnabled.value
+            set(value) {
+                button.isEnabled.value = value
             }
 
         fun onClick(listener: OnDialogButtonClickListener) {
@@ -109,12 +116,28 @@ class MagiskDialog @JvmOverloads constructor(
         ButtonBuilder(button).apply(builder)
     }
 
+    fun <Binding : ViewDataBinding> applyView(binding: Binding, body: Binding.() -> Unit) =
+        apply {
+            this.binding.dialogBaseContainer.removeAllViews()
+            this.binding.dialogBaseContainer.addView(binding.root)
+            binding.apply(body)
+        }
+
+    fun onDismiss(callback: OnDialogButtonClickListener) =
+        apply { setOnDismissListener(callback) }
+
+    fun reveal() = apply { super.show() }
+
     //region Deprecated Members
     @Deprecated("Use applyTitle instead", ReplaceWith("applyTitle"))
     override fun setTitle(title: CharSequence?) = Unit
 
     @Deprecated("Use applyTitle instead", ReplaceWith("applyTitle"))
     override fun setTitle(titleId: Int) = Unit
+
+    @Deprecated("Use reveal()", ReplaceWith("reveal()"))
+    override fun show() {
+    }
     //endregion
 }
 

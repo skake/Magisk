@@ -74,7 +74,7 @@ class SettingsFragment : MagiskFragment<SettingsViewModel, FragmentSettingsBindi
                 title = "Follow system settings"
                 onClick { updateDarkMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) }
             }
-            .show()
+            .reveal()
     }
 
     private fun updateDarkMode(mode: Int) {
