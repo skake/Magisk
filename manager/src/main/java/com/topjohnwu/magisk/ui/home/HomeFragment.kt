@@ -7,13 +7,13 @@ import com.topjohnwu.magisk.R
 import com.topjohnwu.magisk.databinding.FragmentHomeBinding
 import com.topjohnwu.magisk.ui.base.MagiskFragment
 import com.topjohnwu.magisk.util.setOnViewReadyListener
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.max
 
 class HomeFragment : MagiskFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override val layoutRes: Int = R.layout.fragment_home
-    override val viewModel: HomeViewModel by sharedViewModel()
+    override val viewModel: HomeViewModel by viewModel()
 
     private val bottomSheet get() = BottomSheetBehavior.from(binding.homeSheet)
 

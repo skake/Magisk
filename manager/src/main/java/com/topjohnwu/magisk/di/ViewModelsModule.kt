@@ -1,6 +1,7 @@
 package com.topjohnwu.magisk.di
 
 import com.topjohnwu.magisk.ui.MainViewModel
+import com.topjohnwu.magisk.ui.flash.FlashActivityArgs
 import com.topjohnwu.magisk.ui.flash.FlashViewModel
 import com.topjohnwu.magisk.ui.home.HomeViewModel
 import com.topjohnwu.magisk.ui.log.LogViewModel
@@ -18,6 +19,6 @@ val viewModelModules = module {
     viewModel { ModuleViewModel() }
     viewModel { SettingsViewModel() }
     viewModel { SuperuserViewModel(get()) }
-    viewModel { FlashViewModel() }
+    viewModel { (data: FlashActivityArgs) -> FlashViewModel(data) }
     viewModel { SuperuserRequestViewModel() }
 }

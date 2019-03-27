@@ -2,6 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "kotlin-android-extensions"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
+apply plugin: "androidx.navigation.safeargs"
 
 repositories {
     google()
@@ -57,9 +58,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ["*.jar"], dir: "libs")
-    //implementation project(":net")
-    //implementation project(":shared")
-    //implementation project(":signing")
+    implementation project(":net")
+    implementation project(":shared")
+    implementation project(":signing")
 
 
     // DEX

@@ -9,31 +9,65 @@
         android:id="@+id/homeFragment"
         android:name="com.topjohnwu.magisk.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/flashActivity"
+            app:destination="@id/flashActivity" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/logFragment"
         android:name="com.topjohnwu.magisk.ui.log.LogFragment"
-        android:label="LogFragment" />
+        android:label="LogFragment"
+        tools:layout="@layout/fragment_log" />
 
     <fragment
         android:id="@+id/moduleFragment"
         android:name="com.topjohnwu.magisk.ui.module.ModuleFragment"
-        android:label="ModuleFragment" />
+        android:label="ModuleFragment"
+        tools:layout="@layout/fragment_module">
+
+        <action
+            android:id="@+id/flashActivity"
+            app:destination="@id/flashActivity" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.topjohnwu.magisk.ui.settings.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings">
+
+        <action
+            android:id="@+id/flashActivity"
+            app:destination="@id/flashActivity" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/superuserFragment"
         android:name="com.topjohnwu.magisk.ui.superuser.SuperuserFragment"
-        android:label="SuperuserFragment" />
+        android:label="SuperuserFragment"
+        tools:layout="@layout/fragment_superuser" />
 
     <activity
         android:id="@+id/flashActivity"
         android:name="com.topjohnwu.magisk.ui.flash.FlashActivity"
-        android:label="FlashActivity" />
+        android:label="FlashActivity"
+        tools:layout="@layout/activity_flash">
+
+        <argument
+            android:name="action"
+            app:argType="com.topjohnwu.magisk.util.directions.FlashAction" />
+
+        <argument
+            android:name="data"
+            app:argType="string"
+            app:nullable="true" />
+
+    </activity>
 
 </navigation>

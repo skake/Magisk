@@ -55,6 +55,6 @@ class ModuleViewModel : MagiskViewModel() {
     fun uninstallPressed(item: ModuleInstalledRvItem) = Unit
     fun modulePressed(item: ModuleRvItem) = Unit
     fun installPressed(item: ModuleRvItem) = Unit
-    fun installExternalPressed() = Unit
+    fun installExternalPressed() = ViewEvent.NAVIGATION_INSTALL_EXT_MODULE.publish()
 
 }

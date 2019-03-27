@@ -8,13 +8,14 @@ import com.topjohnwu.magisk.databinding.ActivitySuperuserRequestBinding
 import com.topjohnwu.magisk.ui.base.MagiskActivity
 import com.topjohnwu.magisk.view.MagiskDialog
 import java.util.concurrent.TimeUnit
+import org.koin.androidx.viewmodel.ext.android.viewModel as viewModelWorkGodDammit
 
 
 class SuperuserRequestActivity :
     MagiskActivity<SuperuserRequestViewModel, ActivitySuperuserRequestBinding>() {
 
     override val layoutRes: Int = R.layout.activity_superuser_request
-    override val viewModel: SuperuserRequestViewModel by viewModel()
+    override val viewModel: SuperuserRequestViewModel by viewModelWorkGodDammit()
 
     private lateinit var dialog: MagiskDialog
 

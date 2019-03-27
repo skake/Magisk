@@ -1,14 +1,20 @@
 package com.topjohnwu.magisk.ui.module
 
+import android.Manifest
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.topjohnwu.magisk.Constants
 import com.topjohnwu.magisk.R
 import com.topjohnwu.magisk.databinding.FragmentModuleBinding
 import com.topjohnwu.magisk.ui.base.MagiskFragment
+import com.topjohnwu.magisk.ui.events.ViewEvent.NAVIGATION_INSTALL_EXT_MODULE
 import com.topjohnwu.magisk.util.addOnGlobalLayoutListener
+import com.topjohnwu.magisk.util.directions.FlashAction
 import com.topjohnwu.magisk.util.setOnViewReadyListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.max
@@ -21,6 +27,12 @@ class ModuleFragment : MagiskFragment<ModuleViewModel, FragmentModuleBinding>() 
 
     private val bottomSheet get() = BottomSheetBehavior.from(binding.moduleSheet)
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            Constants.ID.FETCH_ZIP -> navigateToFlash(data?.data)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -29,6 +41,23 @@ class ModuleFragment : MagiskFragment<ModuleViewModel, FragmentModuleBinding>() 
         setUpGlance()
     }
 
+    override fun onSimpleEventDispatched(event: Int) {
+        super.onSimpleEventDispatched(event)
+        when (event) {
+            NAVIGATION_INSTALL_EXT_MODULE -> installExtModule()
+        }
+    }
+
+    private fun installExtModule() {
+        withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE) {
+            val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+                type = "application/zip"
+            }
+            startActivityForResult(intent, Constants.ID.FETCH_ZIP)
+        }
+    }
+
+    //region Setup UI
     private fun setUpSheet() {
         binding.homeParent.addOnGlobalLayoutListener {
             with(binding) {
@@ -60,6 +89,13 @@ class ModuleFragment : MagiskFragment<ModuleViewModel, FragmentModuleBinding>() 
 
     private fun setUpGlance() {
         GravitySnapHelper(Gravity.START).attachToRecyclerView(binding.moduleGlanceInstalled)
+    }
+    //endregion
+
+    private fun navigateToFlash(data: Uri?) {
+        val directions = ModuleFragmentDirections
+            .flashActivity(FlashAction.FLASH_ZIP, data.toString())
+        navController.navigate(directions)
     }
 
     override fun onBackPressed(): Boolean {

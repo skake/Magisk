@@ -1,9 +1,8 @@
 package com.topjohnwu.magisk.di
 
+import com.squareup.moshi.Moshi
 import com.topjohnwu.magisk.Constants
 import com.topjohnwu.magisk.data.network.ApiServices
-import com.topjohnwu.magisk.data.network.TokenInterceptor
-import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module.module
@@ -14,9 +13,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 val networkingModule = module {
-    single { TokenInterceptor() }
-
-    single { createOkHttpClient(get()) }
+    single { createOkHttpClient() }
 
     single { createConverterFactory() }
     single { createCallAdapterFactory() }
@@ -26,14 +23,13 @@ val networkingModule = module {
     single { createApiService<ApiServices>(get(), Constants.API_URL) }
 }
 
-fun createOkHttpClient(tokenInterceptor: TokenInterceptor): OkHttpClient {
+fun createOkHttpClient(): OkHttpClient {
 
     val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
     return OkHttpClient.Builder()
-        .addInterceptor(tokenInterceptor)
         .addInterceptor(httpLoggingInterceptor)
         .build()
 }
