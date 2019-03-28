@@ -11,7 +11,7 @@ import com.skoumal.teanity.util.KObservableField
 import com.topjohnwu.magisk.BR
 import com.topjohnwu.magisk.Constants
 import com.topjohnwu.magisk.model.entity.ConsoleRvItem
-import com.topjohnwu.magisk.model.flash.FlashManager
+import com.topjohnwu.magisk.model.flash.*
 import com.topjohnwu.magisk.ui.base.MagiskViewModel
 import com.topjohnwu.magisk.ui.events.ViewEvent
 import com.topjohnwu.magisk.util.*
@@ -38,25 +38,25 @@ class FlashViewModel(
 
     init {
         val job = when (data.action) {
-            FlashAction.FLASH_ZIP -> FlashManager<FlashManager.Flash> {
+            FlashAction.FLASH_ZIP -> FlashManager<ActionFlash> {
                 context = this@FlashViewModel.context
                 console = this@FlashViewModel
                 source = data.data.orEmpty().toUri()
             }
-            FlashAction.FLASH_MAGISK -> FlashManager<FlashManager.CurrentSlot> {
+            FlashAction.FLASH_MAGISK -> FlashManager<ActionCurrentSlot> {
                 context = this@FlashViewModel.context
                 console = this@FlashViewModel
             }
-            FlashAction.FLASH_INACTIVE_SLOT -> FlashManager<FlashManager.InactiveSlot> {
+            FlashAction.FLASH_INACTIVE_SLOT -> FlashManager<ActionInactiveSlot> {
                 context = this@FlashViewModel.context
                 console = this@FlashViewModel
             }
-            FlashAction.PATCH_BOOT -> FlashManager<FlashManager.PatchBoot> {
+            FlashAction.PATCH_BOOT -> FlashManager<ActionPatchBoot> {
                 context = this@FlashViewModel.context
                 console = this@FlashViewModel
                 source = data.data.orEmpty().toUri()
             }
-            FlashAction.UNINSTALL -> FlashManager<FlashManager.Uninstall> {
+            FlashAction.UNINSTALL -> FlashManager<ActionUninstall> {
                 context = this@FlashViewModel.context
                 console = this@FlashViewModel
                 source = data.data.orEmpty().toUri()
