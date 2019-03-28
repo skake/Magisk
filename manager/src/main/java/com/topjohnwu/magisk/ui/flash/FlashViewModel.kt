@@ -1,6 +1,5 @@
 package com.topjohnwu.magisk.ui.flash
 
-import android.net.Uri
 import android.os.Handler
 import androidx.core.net.toUri
 import androidx.core.os.postDelayed
@@ -10,6 +9,7 @@ import com.skoumal.teanity.util.KObservableField
 import com.topjohnwu.magisk.BR
 import com.topjohnwu.magisk.Constants
 import com.topjohnwu.magisk.model.entity.ConsoleRvItem
+import com.topjohnwu.magisk.model.flash.FlashManager
 import com.topjohnwu.magisk.ui.base.MagiskViewModel
 import com.topjohnwu.magisk.ui.events.ViewEvent
 import com.topjohnwu.magisk.util.*
@@ -20,7 +20,7 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 
 
-class FlashViewModel(data: FlashActivityArgs) : MagiskViewModel() {
+class FlashViewModel(data: FlashActivityArgs) : MagiskViewModel(), IFlashLog {
 
     val showRestartTitle = KObservableField(false)
     val behaviorText = KObservableField("Flashing...")
@@ -33,11 +33,24 @@ class FlashViewModel(data: FlashActivityArgs) : MagiskViewModel() {
 
     init {
         val job = when (data.action) {
-            FlashAction.FLASH_ZIP -> flashZip(data.data.orEmpty().toUri())
-            FlashAction.FLASH_MAGISK -> flashMagisk()
-            FlashAction.FLASH_INACTIVE_SLOT -> flashInactiveSlot()
-            FlashAction.PATCH_BOOT -> patchBoot(data.data.orEmpty().toUri())
-            FlashAction.UNINSTALL -> uninstall(data.data.orEmpty().toUri())
+            FlashAction.FLASH_ZIP -> FlashManager<FlashManager.Flash> {
+                console = this@FlashViewModel
+                source = data.data.orEmpty().toUri()
+            }
+            FlashAction.FLASH_MAGISK -> FlashManager<FlashManager.Magisk> {
+                console = this@FlashViewModel
+            }
+            FlashAction.FLASH_INACTIVE_SLOT -> FlashManager<FlashManager.InactiveSlot> {
+                console = this@FlashViewModel
+            }
+            FlashAction.PATCH_BOOT -> FlashManager<FlashManager.PatchBoot> {
+                console = this@FlashViewModel
+                source = data.data.orEmpty().toUri()
+            }
+            FlashAction.UNINSTALL -> FlashManager<FlashManager.Uninstall> {
+                console = this@FlashViewModel
+                source = data.data.orEmpty().toUri()
+            }
         }
 
         job.delay(3, TimeUnit.SECONDS)
@@ -71,22 +84,9 @@ class FlashViewModel(data: FlashActivityArgs) : MagiskViewModel() {
         }
     //endregion
 
-    private fun flashZip(data: Uri) = Single.just(data)
-        .doOnSubscribe { log("- Installing from zip") }
-
-    private fun flashMagisk() = Single.just(Unit)
-        .doOnSubscribe { log("- Installing Magisk") }
-
-    private fun flashInactiveSlot() = Single.just(Unit)
-        .doOnSubscribe { log("- Installing to inactive slot") }
-
-    private fun patchBoot(data: Uri) = Single.just(data)
-        .doOnSubscribe { log("- Patching boot") }
-
-    private fun uninstall(data: Uri) = Single.just(data)
-        .doOnSubscribe { log("- Uninstalling") }
-
-    private fun log(line: String) = lines.add(ConsoleRvItem(line))
+    override fun log(line: String) {
+        lines.add(ConsoleRvItem(line))
+    }
 
     private fun showJobSuccess() {
         state = State.LOADED
