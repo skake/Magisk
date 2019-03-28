@@ -43,7 +43,7 @@ class FlashViewModel(
                 console = this@FlashViewModel
                 source = data.data.orEmpty().toUri()
             }
-            FlashAction.FLASH_MAGISK -> FlashManager<FlashManager.Magisk> {
+            FlashAction.FLASH_MAGISK -> FlashManager<FlashManager.CurrentSlot> {
                 context = this@FlashViewModel.context
                 console = this@FlashViewModel
             }

@@ -51,7 +51,7 @@ sealed class FlashManager {
 
 
     //region Children
-    class Flash : FlashManager() {
+    open class Flash : FlashManager() {
 
         lateinit var source: Uri
 
@@ -95,7 +95,7 @@ sealed class FlashManager {
             }
             .map { it.toResult() }
             .doOnDispose {
-                tmpFile
+                tmpFile.parentFile.listFiles().forEach { it.deleteRecursively() }
             }
 
         @WorkerThread
@@ -122,11 +122,14 @@ sealed class FlashManager {
         }
     }
 
-    class Uninstall : FlashManager() {
+    class Uninstall : Flash() {
 
-        lateinit var source: Uri
-
-        override fun invoke(): Single<Result> = Single.error(NotImplementedError())
+        override fun invoke() = super.invoke()
+            .doOnSuccess {
+                if (it.isSuccess) {
+                    Shell.su("pm uninstall ${context.packageName}")
+                }
+            }
     }
 
     class PatchBoot : FlashManager() {
@@ -136,12 +139,16 @@ sealed class FlashManager {
         override fun invoke(): Single<Result> = Single.error(NotImplementedError())
     }
 
-    class InactiveSlot : FlashManager() {
+    class InactiveSlot : Magisk() {
         override fun invoke(): Single<Result> = Single.error(NotImplementedError())
     }
 
-    class Magisk : FlashManager() {
+    class CurrentSlot : Magisk() {
         override fun invoke(): Single<Result> = Single.error(NotImplementedError())
+    }
+
+    abstract class Magisk : FlashManager() {
+        override fun invoke(): Single<Result> {}
     }
     //endregion
 
