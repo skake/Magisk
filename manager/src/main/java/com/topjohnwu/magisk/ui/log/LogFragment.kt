@@ -8,7 +8,7 @@ import com.topjohnwu.magisk.databinding.FragmentLogBinding
 import com.topjohnwu.magisk.ui.base.MagiskFragment
 import com.topjohnwu.magisk.util.addOnGlobalLayoutListener
 import com.topjohnwu.magisk.util.setOnViewReadyListener
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.viewModel
 import kotlin.math.max
 
 

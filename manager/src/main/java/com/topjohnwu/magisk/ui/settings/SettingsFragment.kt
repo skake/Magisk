@@ -12,7 +12,7 @@ import com.topjohnwu.magisk.ui.base.MagiskFragment
 import com.topjohnwu.magisk.ui.events.ViewEvent.DARK_MODE_PRESS
 import com.topjohnwu.magisk.util.addOnGlobalLayoutListener
 import com.topjohnwu.magisk.view.MagiskDialog
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.viewModel
 import kotlin.math.max
 
 class SettingsFragment : MagiskFragment<SettingsViewModel, FragmentSettingsBinding>() {

@@ -16,7 +16,7 @@ import com.topjohnwu.magisk.ui.events.ViewEvent.NAVIGATION_INSTALL_EXT_MODULE
 import com.topjohnwu.magisk.util.addOnGlobalLayoutListener
 import com.topjohnwu.magisk.util.directions.FlashAction
 import com.topjohnwu.magisk.util.setOnViewReadyListener
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.viewModel
 import kotlin.math.max
 
 

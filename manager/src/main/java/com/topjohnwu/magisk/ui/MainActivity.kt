@@ -6,6 +6,7 @@ import com.topjohnwu.magisk.R
 import com.topjohnwu.magisk.databinding.ActivityMainBinding
 import com.topjohnwu.magisk.ui.base.MagiskActivity
 import com.topjohnwu.magisk.ui.events.ViewEvent
+import org.koin.androidx.viewmodel.ext.viewModel
 
 class MainActivity : MagiskActivity<MainViewModel, ActivityMainBinding>() {
 

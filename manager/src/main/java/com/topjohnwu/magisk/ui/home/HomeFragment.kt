@@ -7,7 +7,7 @@ import com.topjohnwu.magisk.R
 import com.topjohnwu.magisk.databinding.FragmentHomeBinding
 import com.topjohnwu.magisk.ui.base.MagiskFragment
 import com.topjohnwu.magisk.util.setOnViewReadyListener
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.viewModel
 import kotlin.math.max
 
 class HomeFragment : MagiskFragment<HomeViewModel, FragmentHomeBinding>() {

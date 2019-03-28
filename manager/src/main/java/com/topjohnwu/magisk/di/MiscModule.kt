@@ -2,7 +2,7 @@ package com.topjohnwu.magisk.di
 
 import android.content.Context
 import android.net.ConnectivityManager
-import org.koin.dsl.module.module
+import org.koin.dsl.module
 
 val miscModule = module {
 

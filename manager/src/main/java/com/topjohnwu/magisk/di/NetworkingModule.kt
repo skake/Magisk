@@ -5,7 +5,7 @@ import com.topjohnwu.magisk.Constants
 import com.topjohnwu.magisk.data.network.ApiServices
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.dsl.module.module
+import org.koin.dsl.module
 import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit

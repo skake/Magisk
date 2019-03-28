@@ -4,7 +4,8 @@ import android.app.Application
 import android.util.Log
 import com.chibatching.kotpref.Kotpref
 import com.topjohnwu.magisk.di.koinModules
-import org.koin.android.ext.android.startKoin
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 import timber.log.Timber
 
 @Suppress("ConstantConditionIf")
@@ -15,7 +16,10 @@ class MyApplication : Application() {
 
         Kotpref.init(this)
 
-        startKoin(this, koinModules)
+        startKoin {
+            androidContext(this@MyApplication)
+            modules(koinModules)
+        }
 
         if (Constants.DEBUG) {
             Timber.plant(debugTree)

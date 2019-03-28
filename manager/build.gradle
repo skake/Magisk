@@ -68,7 +68,7 @@ dependencies {
     implementation group: "com.android.support", name: "multidex", version: vDex
 
     // FRAMEWORK
-    def vTeanity = "0.2.1"
+    def vTeanity = "0.3"
     implementation group: "com.github.skoumalcz", name: "teanity", version: vTeanity
 
     // KOTLIN
@@ -76,19 +76,19 @@ dependencies {
     implementation group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jdk7", version: vKotlin
 
     // SUPPORT LIBS
-    def vMaterial = "1.0.0"
+    def vMaterial = "1.1.0-alpha04"
     def vConstraint = "2.0.0-alpha3"
-    def vRoom = "2.0.0"
-    def vWork = "1.0.0"
+    def vRoom = "2.1.0-alpha05"
+    def vWork = "2.0.0"
     def vPreference = "1.1.0-alpha04"
     implementation group: "com.google.android.material", name: "material", version: vMaterial
     implementation group: "androidx.constraintlayout", name: "constraintlayout", version: vConstraint
     implementation group: "androidx.room", name: "room-rxjava2", version: vRoom
-    implementation group: "android.arch.work", name: "work-runtime-ktx", version: vWork
+    implementation group: "androidx.work", name: "work-runtime-ktx", version: vWork
     implementation group: "androidx.preference", name: "preference", version: vPreference, ext: "aar"
 
     // DEPENDENCY INJECTION
-    def vKoin = "1.0.2"
+    def vKoin = "2.0.0-beta-1"
     implementation group: "org.koin", name: "koin-core", version: vKoin
     implementation group: "org.koin", name: "koin-android", version: vKoin
     implementation group: "org.koin", name: "koin-androidx-viewmodel", version: vKoin
@@ -106,7 +106,7 @@ dependencies {
     implementation group: "com.squareup.moshi", name: "moshi-kotlin", version: vMoshi
 
     // GLIDE
-    def vGlide = "4.8.0"
+    def vGlide = "4.9.0"
     implementation group: "com.github.bumptech.glide", name: "okhttp3-integration", version: vGlide, ext: "aar"
 
     // EASING
