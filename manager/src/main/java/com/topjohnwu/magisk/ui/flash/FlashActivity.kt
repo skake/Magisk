@@ -2,6 +2,7 @@ package com.topjohnwu.magisk.ui.flash
 
 import android.view.KeyEvent
 import androidx.core.os.bundleOf
+import com.skoumal.teanity.viewmodel.LoadingViewModel
 import com.topjohnwu.magisk.R
 import com.topjohnwu.magisk.databinding.ActivityFlashBinding
 import com.topjohnwu.magisk.ui.base.MagiskActivity
@@ -22,6 +23,12 @@ class FlashActivity : MagiskActivity<FlashViewModel, ActivityFlashBinding>() {
             KeyEvent.KEYCODE_VOLUME_DOWN,
             KeyEvent.KEYCODE_VOLUME_UP -> super.onKeyDown(keyCode, event).let { true }
             else -> super.onKeyDown(keyCode, event)
+        }
+    }
+
+    override fun onBackPressed() {
+        if (viewModel.state != LoadingViewModel.State.LOADING) {
+            super.onBackPressed()
         }
     }
 
