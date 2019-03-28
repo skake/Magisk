@@ -1,9 +1,11 @@
 package com.topjohnwu.magisk.ui.flash
 
+import android.content.Context
 import android.os.Handler
 import androidx.core.net.toUri
 import androidx.core.os.postDelayed
 import com.skoumal.teanity.databinding.ComparableRvItem
+import com.skoumal.teanity.extensions.ui
 import com.skoumal.teanity.util.DiffObservableList
 import com.skoumal.teanity.util.KObservableField
 import com.topjohnwu.magisk.BR
@@ -20,7 +22,10 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 
 
-class FlashViewModel(data: FlashActivityArgs) : MagiskViewModel(), IFlashLog {
+class FlashViewModel(
+    data: FlashActivityArgs,
+    private val context: Context
+) : MagiskViewModel(), IFlashLog {
 
     val showRestartTitle = KObservableField(false)
     val behaviorText = KObservableField("Flashing...")
@@ -34,32 +39,35 @@ class FlashViewModel(data: FlashActivityArgs) : MagiskViewModel(), IFlashLog {
     init {
         val job = when (data.action) {
             FlashAction.FLASH_ZIP -> FlashManager<FlashManager.Flash> {
+                context = this@FlashViewModel.context
                 console = this@FlashViewModel
                 source = data.data.orEmpty().toUri()
             }
             FlashAction.FLASH_MAGISK -> FlashManager<FlashManager.Magisk> {
+                context = this@FlashViewModel.context
                 console = this@FlashViewModel
             }
             FlashAction.FLASH_INACTIVE_SLOT -> FlashManager<FlashManager.InactiveSlot> {
+                context = this@FlashViewModel.context
                 console = this@FlashViewModel
             }
             FlashAction.PATCH_BOOT -> FlashManager<FlashManager.PatchBoot> {
+                context = this@FlashViewModel.context
                 console = this@FlashViewModel
                 source = data.data.orEmpty().toUri()
             }
             FlashAction.UNINSTALL -> FlashManager<FlashManager.Uninstall> {
+                context = this@FlashViewModel.context
                 console = this@FlashViewModel
                 source = data.data.orEmpty().toUri()
             }
         }
 
         job.delay(3, TimeUnit.SECONDS)
-            .map { TODO("Flashing is not implemented yet") }
-            .doOnSuccess { showJobSuccess() }
-            .doOnError { showJobFailure() }
+            .doOnError { it.printStackTrace() }
             .assign {
-                onSuccess { }
-                onError { }
+                onSuccess { showJobSuccess() }
+                onError { showJobFailure() }
             }
     }
 
@@ -85,7 +93,7 @@ class FlashViewModel(data: FlashActivityArgs) : MagiskViewModel(), IFlashLog {
     //endregion
 
     override fun log(line: String) {
-        lines.add(ConsoleRvItem(line))
+        ui { lines.add(ConsoleRvItem(line)) }
     }
 
     private fun showJobSuccess() {
