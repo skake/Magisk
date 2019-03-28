@@ -6,6 +6,7 @@ import com.skoumal.teanity.databinding.ComparableRvItem
 import com.skoumal.teanity.util.DiffObservableList
 import com.skoumal.teanity.util.KObservableField
 import com.topjohnwu.magisk.BR
+import com.topjohnwu.magisk.data.repository.FilesRepository
 import com.topjohnwu.magisk.model.entity.SupportItem
 import com.topjohnwu.magisk.model.entity.SupportRvItem
 import com.topjohnwu.magisk.ui.base.MagiskViewModel
@@ -13,7 +14,9 @@ import com.topjohnwu.magisk.ui.events.ViewEvent
 import me.tatarka.bindingcollectionadapter2.OnItemBind
 import kotlin.random.Random
 
-class HomeViewModel : MagiskViewModel() {
+class HomeViewModel(
+    private val filesRepo: FilesRepository
+) : MagiskViewModel() {
 
     object SafetyNetState {
         const val UNKNOWN = 0
