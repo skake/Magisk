@@ -60,11 +60,12 @@ class Zip private constructor(private val values: Builder) {
         }
     }
 
-    private fun File.ensureExists() = if (!parentFile.exists() && !parentFile.mkdirs()) {
-        SuFile(parentFile, name).apply { parentFile.mkdirs() }
-    } else {
-        this
-    }
+    private fun File.ensureExists() =
+        if ((!parentFile.exists() && !parentFile.mkdirs()) || parentFile is SuFile) {
+            SuFile(parentFile, name).apply { parentFile.mkdirs() }
+        } else {
+            this
+        }
 
     private fun File.zipStream() = ZipInputStream(inputStream())
 
