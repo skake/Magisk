@@ -17,8 +17,13 @@ class Zip private constructor(private val values: Builder) {
     class Builder {
         lateinit var zip: File
         lateinit var destination: File
-        var path = ""
+        internal var paths = listOf<String>()
         var isPathTrashy = false
+        var excludeDirs = true
+
+        fun paths(vararg path: String) {
+            paths = path.toList()
+        }
     }
 
     @Suppress("RedundantLambdaArrow")
@@ -27,7 +32,9 @@ class Zip private constructor(private val values: Builder) {
 
         values.zip.zipStream().use {
             it.forEach { e ->
-                if (!e.name.startsWith(values.path) || e.isDirectory) {
+                val isSupported = values.paths.any { path -> e.name.startsWith(path) }
+                val isDirectory = values.excludeDirs && e.isDirectory
+                if (!isSupported || isDirectory) {
                     // Ignore directories, only create files
                     return@forEach
                 }
