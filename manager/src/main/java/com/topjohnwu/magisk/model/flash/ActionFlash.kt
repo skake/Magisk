@@ -23,21 +23,13 @@ open class ActionFlash : FlashManager() {
         .map { source }
         .map {
             log("- Copying zip to temp directory")
-            resolver
-                .openInputStream(it)
-                .orThrow(FileNotFoundException("$it cannot be found"))
-                .copyTo(tmpFile.outputStream())
+            it.copyTo(tmpFile)
             log("- Copying zip successful")
             tmpFile
         }
         .map {
             log("- Unzipping binaries")
-            Zip {
-                zip = it
-                destination = it.parentFile
-            }.unzip(
-                "META-INF/com/google/android" to true
-            )
+            it.unzip()
             tmpFile
         }
         .map {
@@ -56,6 +48,20 @@ open class ActionFlash : FlashManager() {
         .doOnDispose {
             tmpFile.parentFile.listFiles().forEach { it.deleteRecursively() }
         }
+
+    @WorkerThread
+    private fun Uri.copyTo(file: File) = resolver
+        .openInputStream(this)
+        .orThrow(FileNotFoundException("$this cannot be found"))
+        .copyTo(file.outputStream())
+
+    @WorkerThread
+    private fun File.unzip() = Zip {
+        zip = this@unzip
+        destination = parentFile
+    }.unzip(
+        "META-INF/com/google/android" to true
+    )
 
     @WorkerThread
     private fun File.isMagiskModule(): Boolean {
