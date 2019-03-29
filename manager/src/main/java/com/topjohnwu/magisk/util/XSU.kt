@@ -1,6 +1,7 @@
 package com.topjohnwu.magisk.util
 
 import com.topjohnwu.superuser.Shell
+import com.topjohnwu.superuser.io.SuFileInputStream
 import com.topjohnwu.superuser.io.SuFileOutputStream
 import java.io.File
 
@@ -16,3 +17,4 @@ fun reboot(recovery: Boolean = false): Shell.Result {
 }
 
 fun File.suOutputStream() = SuFileOutputStream(this)
+fun File.suInputStream() = SuFileInputStream(this)

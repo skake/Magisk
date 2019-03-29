@@ -47,6 +47,7 @@ object Constants {
     val USER_ID = Process.myUid() / 100000
 
     val MAGISK_LOG_FILENAME = "magisk_install_log_%s.log"
+    val MAGISK_FILENAME = "magisk.zip"
 
     object MAGISK_VER {
         val MIN_SUPPORT = 18000
