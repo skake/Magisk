@@ -35,9 +35,9 @@ open class ActionFlash : FlashManager() {
             Zip {
                 zip = it
                 destination = it.parentFile
-                isPathTrashy = true
-                paths("META-INF/com/google/android")
-            }.unzip()
+            }.unzip(
+                "META-INF/com/google/android" to true
+            )
             tmpFile
         }
         .map {

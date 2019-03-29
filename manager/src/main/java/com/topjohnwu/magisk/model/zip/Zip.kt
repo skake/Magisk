@@ -17,29 +17,28 @@ class Zip private constructor(private val values: Builder) {
     class Builder {
         lateinit var zip: File
         lateinit var destination: File
-        internal var paths = listOf<String>()
-        var isPathTrashy = false
         var excludeDirs = true
-
-        fun paths(vararg path: String) {
-            paths = path.toList()
-        }
     }
 
+    data class Path(val path: String, val pullFromDir: Boolean = true)
+
+    fun unzip(vararg paths: Pair<String, Boolean>) =
+        unzip(*paths.map { Path(it.first, it.second) }.toTypedArray())
+
     @Suppress("RedundantLambdaArrow")
-    fun unzip() {
+    fun unzip(vararg paths: Path) {
         ensureRequiredParams()
 
         values.zip.zipStream().use {
             it.forEach { e ->
-                val isSupported = values.paths.any { path -> e.name.startsWith(path) }
+                val currentPath = paths.firstOrNull { e.name.startsWith(it.path) }
                 val isDirectory = values.excludeDirs && e.isDirectory
-                if (!isSupported || isDirectory) {
+                if (currentPath == null || isDirectory) {
                     // Ignore directories, only create files
                     return@forEach
                 }
 
-                val name = if (values.isPathTrashy) {
+                val name = if (currentPath.pullFromDir) {
                     e.name.substring(e.name.lastIndexOf('/') + 1)
                 } else {
                     e.name
