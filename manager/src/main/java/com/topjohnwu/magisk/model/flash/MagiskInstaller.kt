@@ -11,8 +11,8 @@ abstract class MagiskInstaller : FlashManager() {
 
     lateinit var magiskDownloader: Single<File>
 
-    override fun invoke() = MagiskDownloader.download(installDir, magiskDownloader)
+    protected open fun construct(): Single<Any> = MagiskDownloader
+        .download(installDir, magiskDownloader)
         .flatMap { MagiskPatcher.patch(it, boot) }
-        .map { TODO(); Result(false) }
 
 }
