@@ -23,14 +23,13 @@ open class ActionFlash : FlashManager() {
         .map { source }
         .map {
             log("- Copying zip to temp directory")
-            it.copyTo(tmpFile)
-            log("- Copying zip successful")
-            tmpFile
+            it.copyTo(tmpFile).apply {
+                log("- Copying zip successful")
+            }
         }
         .map {
             log("- Unzipping binaries")
             it.unzip()
-            tmpFile
         }
         .map {
             log("- Checking validity")
@@ -54,6 +53,7 @@ open class ActionFlash : FlashManager() {
         .openInputStream(this)
         .orThrow(FileNotFoundException("$this cannot be found"))
         .copyTo(file.outputStream())
+        .let { file }
 
     @WorkerThread
     private fun File.unzip() = Zip {
@@ -61,7 +61,9 @@ open class ActionFlash : FlashManager() {
         destination = parentFile
     }.unzip(
         "META-INF/com/google/android" to true
-    )
+    ).let {
+        this@unzip
+    }
 
     @WorkerThread
     private fun File.isMagiskModule(): Boolean {
