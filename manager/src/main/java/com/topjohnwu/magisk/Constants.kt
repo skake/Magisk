@@ -87,6 +87,14 @@ object Constants {
         val SOURCE_CODE_URL = "https://github.com/topjohnwu/Magisk"
         val SNET_URL = getRaw("b66b1a914978e5f4c4bbfd74a59f4ad371bac107", "snet.apk")
         val BOOTCTL_URL = getRaw("9c5dfc1b8245c0b5b524901ef0ff0f8335757b77", "bootctl")
+
+        val MAGISK_URL: String
+            get() = when {
+                Config.isCanary -> TODO()
+                Config.isBeta -> TODO()
+                else -> TODO() //stable or default
+            }
+
         private fun getRaw(where: String, name: String): String {
             return String.format(
                 "https://raw.githubusercontent.com/topjohnwu/magisk_files/%s/%s",

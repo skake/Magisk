@@ -10,6 +10,7 @@ import com.skoumal.teanity.util.DiffObservableList
 import com.skoumal.teanity.util.KObservableField
 import com.topjohnwu.magisk.BR
 import com.topjohnwu.magisk.Constants
+import com.topjohnwu.magisk.data.repository.FilesRepository
 import com.topjohnwu.magisk.model.entity.ConsoleRvItem
 import com.topjohnwu.magisk.model.flash.*
 import com.topjohnwu.magisk.ui.base.MagiskViewModel
@@ -24,7 +25,8 @@ import java.util.concurrent.TimeUnit
 
 class FlashViewModel(
     data: FlashActivityArgs,
-    private val context: Context
+    private val context: Context,
+    private val filesRepo: FilesRepository
 ) : MagiskViewModel(), IFlashLog {
 
     val showRestartTitle = KObservableField(false)
@@ -46,10 +48,13 @@ class FlashViewModel(
             FlashAction.FLASH_MAGISK -> FlashManager<ActionCurrentSlot> {
                 context = this@FlashViewModel.context
                 console = this@FlashViewModel
+                magiskDownloader = filesRepo.fetchMagisk()
             }
             FlashAction.FLASH_INACTIVE_SLOT -> FlashManager<ActionInactiveSlot> {
                 context = this@FlashViewModel.context
                 console = this@FlashViewModel
+                magiskDownloader = filesRepo.fetchMagisk()
+                bootctlDownloader = filesRepo.fetchBootCtl()
             }
             FlashAction.PATCH_BOOT -> FlashManager<ActionPatchBoot> {
                 context = this@FlashViewModel.context
@@ -64,6 +69,7 @@ class FlashViewModel(
         }
 
         job.delay(3, TimeUnit.SECONDS)
+            .map { if (!it.isSuccess) throw RuntimeException("Result was not successful") }
             .doOnError { it.printStackTrace() }
             .assign {
                 onSuccess { showJobSuccess() }

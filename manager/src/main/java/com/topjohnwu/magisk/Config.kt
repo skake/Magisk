@@ -10,4 +10,8 @@ object Config : KotprefModel() {
     val magiskChecksum by stringPref("", "magiskChecksum")
     val forceEncrypt by booleanPref(false, "forceEncryption")
     val keepVerity by booleanPref(false, "keepVerity")
+    val isCanary by booleanPref(false, "isCanary")
+    val isBeta by booleanPref(false, "isBeta")
+
+    val isStable get() = !(isCanary || isBeta)
 }

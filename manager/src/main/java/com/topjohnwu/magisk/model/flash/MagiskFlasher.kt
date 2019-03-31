@@ -24,5 +24,6 @@ object MagiskFlasher {
                 true
             }
         }
+        .map { FlashManager.Result(it) }
 
 }
