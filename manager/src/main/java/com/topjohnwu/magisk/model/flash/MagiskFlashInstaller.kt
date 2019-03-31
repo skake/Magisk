@@ -6,8 +6,10 @@ import java.io.File
 
 abstract class MagiskFlashInstaller : MagiskInstaller() {
 
+    private val flasher by lazy { MagiskFlasher(console) }
+
     override fun construct(): Single<File> = super.construct()
-        .flatMap { MagiskFlasher.flash(installDir, boot) }
+        .flatMap { flasher.flash(installDir, boot) }
         .map { boot } //this is stupid
 
 }

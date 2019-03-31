@@ -4,19 +4,22 @@ import android.os.Build
 import com.topjohnwu.magisk.Config
 import com.topjohnwu.magisk.Constants
 import com.topjohnwu.magisk.model.zip.Zip
+import com.topjohnwu.magisk.ui.flash.IFlashLog
 import com.topjohnwu.superuser.ShellUtils
 import com.topjohnwu.superuser.io.SuFile
 import io.reactivex.Single
 import java.io.File
 
 
-object MagiskDownloader {
+class MagiskDownloader(console: IFlashLog) : MagiskLogger(console) {
 
-    private const val x86 = "x86"
-    private const val arm = "arm"
+    companion object {
+        private const val x86 = "x86"
+        private const val arm = "arm"
 
-    private const val magiskinit64 = "magiskinit64"
-    private const val magiskinit = "magiskinit"
+        private const val magiskinit64 = "magiskinit64"
+        private const val magiskinit = "magiskinit"
+    }
 
     private val magiskZip by lazy { File(Config.context.cacheDir, Constants.MAGISK_FILENAME) }
 
@@ -30,13 +33,23 @@ object MagiskDownloader {
 
     /** @return installDir location */
     fun download(installDir: File, downloader: Single<File>) = Single.just(magiskZip)
-        .flatMap { if (it.exists() && it.matchesChecksum()) Single.just(it) else downloader }
+        .flatMap {
+            if (it.exists() && it.matchesChecksum()) {
+                log("- Reusing already downloaded magisk.zip")
+                Single.just(it)
+            } else {
+                log("- Downloading magisk.zip")
+                downloader
+            }
+        }
         .map {
+            log("- Unzipping file")
             it.unzipTo(installDir)
             installDir.ensureCorrectInit()
         }
 
     private fun File.ensureCorrectInit(): File {
+        log("- Ensuring correct init file")
         val init64 = SuFile(this, magiskinit64)
         if (Build.VERSION.SDK_INT >= 21 && Build.SUPPORTED_64_BIT_ABIS.isNotEmpty()) {
             init64.renameTo(SuFile(this, magiskinit))
@@ -56,7 +69,9 @@ object MagiskDownloader {
         "chromeos/" to false
     )
 
-    private fun File.matchesChecksum(checksum: String = Config.magiskChecksum) =
-        ShellUtils.checkSum("MD5", this, checksum)
+    private fun File.matchesChecksum(checksum: String = Config.magiskChecksum): Boolean {
+        log("- Matching checksum with downloaded file")
+        return ShellUtils.checkSum("MD5", this, checksum)
+    }
 
 }

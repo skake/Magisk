@@ -2,6 +2,7 @@ package com.topjohnwu.magisk.model.flash
 
 import com.topjohnwu.magisk.Config
 import com.topjohnwu.magisk.model.su.WriteOnlyList
+import com.topjohnwu.magisk.ui.flash.IFlashLog
 import com.topjohnwu.magisk.util.suInputStream
 import com.topjohnwu.signing.SignBoot
 import com.topjohnwu.superuser.Shell
@@ -9,12 +10,14 @@ import io.reactivex.Single
 import java.io.File
 
 
-object MagiskPatcher {
+class MagiskPatcher(console: IFlashLog) : MagiskLogger(console) {
 
-    private const val newBoot = "new-boot.img"
-    private const val signed = "signed.img"
+    companion object {
+        private const val newBoot = "new-boot.img"
+        private const val signed = "signed.img"
+    }
 
-    private val out = WriteOnlyList { /*log(it)*/ }
+    private val out = WriteOnlyList { log(it) }
 
     /** @return new-boot.img location */
     fun patch(installDir: File, boot: File) = Single.just(installDir to boot)
@@ -24,6 +27,7 @@ object MagiskPatcher {
             val isPatchSuccessful = boot
                 .patch(dir)
                 .cleanup()
+                .to(out, out)
                 .exec()
                 .isSuccess
 

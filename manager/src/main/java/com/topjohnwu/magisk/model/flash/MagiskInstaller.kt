@@ -11,8 +11,10 @@ abstract class MagiskInstaller : FlashManager() {
 
     lateinit var magiskDownloader: Single<File>
 
-    protected open fun construct(): Single<File> = MagiskDownloader
-        .download(installDir, magiskDownloader)
-        .flatMap { MagiskPatcher.patch(it, boot) }
+    private val downloader by lazy { MagiskDownloader(console) }
+    private val patcher by lazy { MagiskPatcher(console) }
+
+    protected open fun construct(): Single<File> = downloader.download(installDir, magiskDownloader)
+        .flatMap { patcher.patch(it, boot) }
 
 }
