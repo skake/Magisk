@@ -11,9 +11,8 @@ abstract class MagiskInstaller : FlashManager() {
 
     lateinit var magiskDownloader: Single<File>
 
-    protected open fun construct(): Single<FlashManager.Result> = MagiskDownloader
+    protected open fun construct(): Single<File> = MagiskDownloader
         .download(installDir, magiskDownloader)
         .flatMap { MagiskPatcher.patch(it, boot) }
-        .map { it.exists().toResult() }
 
 }

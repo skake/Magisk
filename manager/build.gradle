@@ -112,8 +112,10 @@ dependencies {
     // EASING
     def vKotpref = "2.6.0"
     def vTimber = "4.7.1"
+    def vJTAR = "2.3"
     implementation group: "com.chibatching.kotpref", name: "kotpref", version: vKotpref
     implementation group: "com.jakewharton.timber", name: "timber", version: vTimber
+    implementation group: "org.kamranzafar", name: "jtar", version: vJTAR
 
     // UI
     def vOSS = "16.0.2"

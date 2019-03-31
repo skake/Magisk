@@ -42,13 +42,6 @@ abstract class FlashManager {
     data class Result(val isSuccess: Boolean)
     //endregion
 
-    protected fun <T> T?.orThrow(exception: Exception): T {
-        if (this == null) {
-            throw exception
-        }
-        return this
-    }
-
     protected fun Boolean.toResult() = FlashManager.Result(this)
 
 }

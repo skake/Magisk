@@ -3,6 +3,7 @@ package com.topjohnwu.magisk.data.repository
 import android.content.Context
 import com.topjohnwu.magisk.Constants
 import com.topjohnwu.magisk.data.network.ApiServices
+import com.topjohnwu.magisk.util.withStreams
 import java.io.File
 
 
@@ -14,7 +15,9 @@ class FilesRepository(
     private fun fetchZip(url: String, fileName: String = "install.zip") = api.fetchZip(url)
         .map {
             val file = File(context.cacheDir, fileName)
-            it.byteStream().copyTo(file.outputStream())
+            withStreams(it.byteStream(), file.outputStream()) { inStream, outStream ->
+                inStream.copyTo(outStream)
+            }
             file
         }
 

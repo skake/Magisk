@@ -19,5 +19,5 @@ class ActionCurrentSlot : MagiskFlashInstaller() {
     }
     override val installDir: File by lazy { File(context.filesDir.parent, "install") }
 
-    override fun invoke(): Single<Result> = construct()
+    override fun invoke(): Single<Result> = construct().map { Result(true) }
 }

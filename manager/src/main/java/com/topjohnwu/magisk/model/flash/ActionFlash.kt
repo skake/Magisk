@@ -5,9 +5,9 @@ import androidx.annotation.AnyThread
 import androidx.annotation.WorkerThread
 import com.topjohnwu.magisk.model.su.WriteOnlyList
 import com.topjohnwu.magisk.model.zip.Zip
+import com.topjohnwu.magisk.util.copyTo
 import com.topjohnwu.superuser.Shell
 import java.io.File
-import java.io.FileNotFoundException
 
 
 open class ActionFlash : FlashManager() {
@@ -15,7 +15,6 @@ open class ActionFlash : FlashManager() {
     lateinit var source: Uri
 
     private val tmpFile by lazy { File(context.cacheDir, "install.zip") }
-    private val resolver get() = context.contentResolver
     private val out = WriteOnlyList { log(it) }
 
     @AnyThread
@@ -47,13 +46,6 @@ open class ActionFlash : FlashManager() {
         .doOnDispose {
             tmpFile.parentFile.listFiles().forEach { it.deleteRecursively() }
         }
-
-    @WorkerThread
-    private fun Uri.copyTo(file: File) = resolver
-        .openInputStream(this)
-        .orThrow(FileNotFoundException("$this cannot be found"))
-        .copyTo(file.outputStream())
-        .let { file }
 
     @WorkerThread
     private fun File.unzip() = Zip {

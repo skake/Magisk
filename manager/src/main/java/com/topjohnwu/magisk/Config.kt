@@ -12,6 +12,7 @@ object Config : KotprefModel() {
     val keepVerity by booleanPref(false, "keepVerity")
     val isCanary by booleanPref(false, "isCanary")
     val isBeta by booleanPref(false, "isBeta")
+    val bootFormat by stringPref("img", "bootFormat")
 
     val isStable get() = !(isCanary || isBeta)
 }

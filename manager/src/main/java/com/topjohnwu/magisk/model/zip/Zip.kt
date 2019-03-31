@@ -1,6 +1,7 @@
 package com.topjohnwu.magisk.model.zip
 
 import com.topjohnwu.magisk.util.forEach
+import com.topjohnwu.magisk.util.withStreams
 import com.topjohnwu.superuser.io.SuFile
 import java.io.File
 import java.util.zip.ZipInputStream
@@ -49,7 +50,9 @@ class Zip private constructor(private val values: Builder) {
                     .outputStream()
                 //.suOutputStream() //this doesn't seem to create files at all
 
-                it.copyTo(out)
+                withStreams(it, out) { reader, writer ->
+                    reader.copyTo(writer)
+                }
             }
         }
     }
