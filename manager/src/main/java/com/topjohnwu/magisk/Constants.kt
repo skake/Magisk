@@ -48,8 +48,16 @@ object Constants {
 
     val MAGISK_LOG_FILENAME = "magisk_install_log_%s.log"
     val MAGISK_FILENAME = "magisk.zip"
+
     val IMG = "img"
     val IMG_TAR = "img.tar"
+
+    const val SNET_REVISION = "b66b1a914978e5f4c4bbfd74a59f4ad371bac107"
+    const val BOOTCTL_REVISION = "9c5dfc1b8245c0b5b524901ef0ff0f8335757b77"
+
+    const val GITHUB_API_URL = "https://api.github.com/"
+    const val RAW_API_URL = "https://raw.githubusercontent.com/topjohnwu/magisk_files/"
+    const val REPO_API_URL = "https://raw.githubusercontent.com/topjohnwu/Magisk/master"
 
     object MAGISK_VER {
         val MIN_SUPPORT = 18000
