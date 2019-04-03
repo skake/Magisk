@@ -19,6 +19,6 @@ val viewModelModules = module {
     viewModel { ModuleViewModel() }
     viewModel { SettingsViewModel() }
     viewModel { SuperuserViewModel(get()) }
-    viewModel { (data: FlashActivityArgs) -> FlashViewModel(data, get()) }
+    viewModel { (data: FlashActivityArgs) -> FlashViewModel(data, get(), get()) }
     viewModel { SuperuserRequestViewModel() }
 }

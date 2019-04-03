@@ -1,8 +1,8 @@
-package com.topjohnwu.magisk.data.database
+package com.topjohnwu.magisk.data.database.base
 
 import androidx.annotation.StringDef
-import com.topjohnwu.magisk.data.database.Order.Companion.ASC
-import com.topjohnwu.magisk.data.database.Order.Companion.DESC
+import com.topjohnwu.magisk.data.database.base.Order.Companion.ASC
+import com.topjohnwu.magisk.data.database.base.Order.Companion.DESC
 
 
 interface MagiskQueryBuilder {

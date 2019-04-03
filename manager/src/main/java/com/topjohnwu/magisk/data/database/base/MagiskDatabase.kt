@@ -1,11 +1,8 @@
-package com.topjohnwu.magisk.data.database
+package com.topjohnwu.magisk.data.database.base
 
-import android.content.ContentValues
-import android.content.Context
 import androidx.annotation.AnyThread
 import com.topjohnwu.superuser.Shell
 import io.reactivex.Single
-import timber.log.Timber
 
 
 object MagiskDB {

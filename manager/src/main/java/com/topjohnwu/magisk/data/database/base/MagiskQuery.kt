@@ -1,4 +1,4 @@
-package com.topjohnwu.magisk.data.database
+package com.topjohnwu.magisk.data.database.base
 
 
 data class MagiskQuery(private val _query: String) {
