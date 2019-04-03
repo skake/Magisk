@@ -89,6 +89,10 @@ open class Insert : MagiskQueryBuilder {
         _values = pairs.toMap()
     }
 
+    fun values(values: Map<String, String>) {
+        _values = values
+    }
+
     override fun toString(): String {
         return StringBuilder()
             .appendln(requestType)

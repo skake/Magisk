@@ -21,9 +21,10 @@ fun MagiskQuery.query() = Single.just(Shell.su(query))
     .map { it.exec().out }
     .map { it.toMap() }
 
+fun List<String>.toMap() = map { it.split(Regex("\\|")) }
+    .map { it.toMapInternal() }
 
-fun List<String>.toMap() = flatMap { it.split(Regex("\\|")) }
-    .map { it.split("=", limit = 2) }
+private fun List<String>.toMapInternal() = map { it.split("=", limit = 2) }
     .filter { it.size == 2 }
     .map { Pair(it[0], it[1]) }
     .toMap()

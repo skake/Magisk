@@ -6,6 +6,8 @@ import com.chibatching.kotpref.KotprefModel
 object Config : KotprefModel() {
     override val kotprefName: String = "config"
 
+    val isStable get() = !(isCanary || isBeta)
+
     var darkMode by intPref(default = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, key = "darkMode")
     val magiskChecksum by stringPref("", "magiskChecksum")
     val forceEncrypt by booleanPref(false, "forceEncryption")
@@ -13,6 +15,5 @@ object Config : KotprefModel() {
     val isCanary by booleanPref(false, "isCanary")
     val isBeta by booleanPref(false, "isBeta")
     val bootFormat by stringPref("img", "bootFormat")
-
-    val isStable get() = !(isCanary || isBeta)
+    val suLogTimeout by longPref(0, "suLogTimeout")
 }
