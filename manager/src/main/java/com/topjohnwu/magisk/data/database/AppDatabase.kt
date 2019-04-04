@@ -2,11 +2,11 @@ package com.topjohnwu.magisk.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.topjohnwu.magisk.model.entity.MagiskModule
+import com.topjohnwu.magisk.model.entity.Repository
 
 @Database(
     version = 6,
-    entities = [MagiskModule.Repository::class]
+    entities = [Repository::class]
 )
 abstract class AppDatabase : RoomDatabase() {
 

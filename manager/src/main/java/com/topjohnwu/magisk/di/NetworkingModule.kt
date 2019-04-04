@@ -2,10 +2,9 @@ package com.topjohnwu.magisk.di
 
 import com.squareup.moshi.Moshi
 import com.topjohnwu.magisk.Constants
-import com.topjohnwu.magisk.data.network.ApiServices
 import com.topjohnwu.magisk.data.network.GithubApiServices
-import com.topjohnwu.magisk.data.network.RawApiServices
-import com.topjohnwu.magisk.data.network.RepoApiServices
+import com.topjohnwu.magisk.data.network.GithubRawApiServices
+import com.topjohnwu.magisk.data.network.GithubServices
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -23,10 +22,9 @@ val networkingModule = module {
 
     single { createRetrofit(get(), get(), get()) }
 
-    single { createApiService<ApiServices>(get(), Constants.API_URL) }
+    single { createApiService<GithubServices>(get(), Constants.GITHUB_URL) }
     single { createApiService<GithubApiServices>(get(), Constants.GITHUB_API_URL) }
-    single { createApiService<RawApiServices>(get(), Constants.RAW_API_URL) }
-    single { createApiService<RepoApiServices>(get(), Constants.REPO_API_URL) }
+    single { createApiService<GithubRawApiServices>(get(), Constants.GITHUB_RAW_API_URL) }
 }
 
 fun createOkHttpClient(): OkHttpClient {

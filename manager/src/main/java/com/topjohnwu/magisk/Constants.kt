@@ -55,9 +55,9 @@ object Constants {
     const val SNET_REVISION = "b66b1a914978e5f4c4bbfd74a59f4ad371bac107"
     const val BOOTCTL_REVISION = "9c5dfc1b8245c0b5b524901ef0ff0f8335757b77"
 
+    const val GITHUB_URL = "https://github.com/"
     const val GITHUB_API_URL = "https://api.github.com/"
-    const val RAW_API_URL = "https://raw.githubusercontent.com/topjohnwu/magisk_files/"
-    const val REPO_API_URL = "https://raw.githubusercontent.com/topjohnwu/Magisk/master"
+    const val GITHUB_RAW_API_URL = "https://raw.githubusercontent.com/"
 
     object MAGISK_VER {
         val MIN_SUPPORT = 18000
@@ -80,23 +80,11 @@ object Constants {
     }
 
     object Url {
-        val STABLE_URL = getRaw("master", "stable.json")
-        val BETA_URL = getRaw("master", "beta.json")
-        val CANARY_URL = getRaw("master", "canary_builds/release.json")
-        val CANARY_DEBUG_URL = getRaw("master", "canary_builds/canary.json")
-        val REPO_URL =
-            "https://api.github.com/users/Magisk-Modules-Repo/repos?per_page=100&sort=pushed&page=%d"
-        val FILE_URL = "https://raw.githubusercontent.com/Magisk-Modules-Repo/%s/master/%s"
-        val ZIP_URL = "https://github.com/Magisk-Modules-Repo/%s/archive/master.zip"
-        val MODULE_INSTALLER =
-            "https://raw.githubusercontent.com/topjohnwu/Magisk/master/scripts/module_installer.sh"
         val PAYPAL_URL = "https://www.paypal.me/topjohnwu"
         val PATREON_URL = "https://www.patreon.com/topjohnwu"
         val TWITTER_URL = "https://twitter.com/topjohnwu"
         val XDA_THREAD = "http://forum.xda-developers.com/showthread.php?t=3432382"
         val SOURCE_CODE_URL = "https://github.com/topjohnwu/Magisk"
-        val SNET_URL = getRaw("b66b1a914978e5f4c4bbfd74a59f4ad371bac107", "snet.apk")
-        val BOOTCTL_URL = getRaw("9c5dfc1b8245c0b5b524901ef0ff0f8335757b77", "bootctl")
 
         val MAGISK_URL: String
             get() = when {
@@ -104,14 +92,6 @@ object Constants {
                 Config.isBeta -> TODO()
                 else -> TODO() //stable or default
             }
-
-        private fun getRaw(where: String, name: String): String {
-            return String.format(
-                "https://raw.githubusercontent.com/topjohnwu/magisk_files/%s/%s",
-                where,
-                name
-            )
-        }
     }
 
     object Key {
