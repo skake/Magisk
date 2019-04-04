@@ -17,7 +17,9 @@ object MagiskDB {
 }
 
 @AnyThread
-fun MagiskQuery.query() = Single.just(Shell.su(query))
+fun MagiskQuery.query() = query.su()
+
+fun String.su() = Single.just(Shell.su(this))
     .map { it.exec().out }
     .map { it.toMap() }
 
