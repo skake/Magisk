@@ -6,7 +6,7 @@ import com.topjohnwu.magisk.model.entity.MagiskModule
 
 @Database(
     version = 6,
-    entities = [MagiskModule.Module::class]
+    entities = [MagiskModule.Repository::class]
 )
 abstract class AppDatabase : RoomDatabase() {
 
