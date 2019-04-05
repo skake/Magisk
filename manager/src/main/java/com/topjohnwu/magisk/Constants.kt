@@ -86,6 +86,7 @@ object Constants {
         val XDA_THREAD = "http://forum.xda-developers.com/showthread.php?t=3432382"
         val SOURCE_CODE_URL = "https://github.com/topjohnwu/Magisk"
 
+        @Deprecated("")
         val MAGISK_URL: String
             get() = when {
                 Config.isCanary -> TODO()

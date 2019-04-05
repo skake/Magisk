@@ -7,6 +7,7 @@ import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Streaming
+import retrofit2.http.Url
 
 
 interface GithubRawApiServices {
@@ -27,7 +28,7 @@ interface GithubRawApiServices {
 
     @GET("$MAGISK_FILES/{$REVISION}/snet.apk")
     @Streaming
-    fun fetchSnet(@Path(REVISION) revision: String = Constants.SNET_REVISION): Single<ResponseBody>
+    fun fetchSafetynet(@Path(REVISION) revision: String = Constants.SNET_REVISION): Single<ResponseBody>
 
     @GET("$MAGISK_FILES/{$REVISION}/bootctl")
     @Streaming
@@ -50,6 +51,14 @@ interface GithubRawApiServices {
     fun fetchFile(id: String, file: String): Single<ResponseBody>
 
     //endregion
+
+    /**
+     * This method shall be used exclusively for fetching files from urls from previous requests.
+     * Him, who uses it in a wrong way, shall die in an eternal flame.
+     * */
+    @GET
+    @Streaming
+    fun fetchFile(@Url url: String): Single<ResponseBody>
 
 
     companion object {
