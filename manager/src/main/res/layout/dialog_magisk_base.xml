@@ -55,7 +55,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/colorAccent"
+                    app:tint="@color/colorSecondary"
                     tools:src="@drawable/ic_log" />
 
                 <androidx.appcompat.widget.AppCompatTextView

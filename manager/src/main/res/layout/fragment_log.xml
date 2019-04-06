@@ -41,8 +41,8 @@
                     android:id="@+id/log_glance_tabs"
                     android:background="@android:color/transparent"
                     android:minWidth="250dp"
-                    app:tabSelectedTextColor="@color/colorAccent"
-                    app:tabIndicatorColor="@color/colorAccent"
+                    app:tabIndicatorColor="@color/colorSecondary"
+                    app:tabSelectedTextColor="@color/colorSecondary"
                     app:tabTextColor="@color/colorTextTinted" />
 
             </com.google.android.material.card.MaterialCardView>

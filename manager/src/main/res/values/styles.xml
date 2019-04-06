@@ -5,7 +5,7 @@
     <style name="ThemeFoundation.Colored">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorSecondary</item>
     </style>
 
     <style name="ThemeFoundation.Colored.ExtraProps" />
@@ -15,7 +15,7 @@
     <style name="AppTheme.Flashing" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@android:color/black</item>
         <item name="colorPrimaryDark">@android:color/black</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorSecondary</item>
         <item name="android:windowBackground">@android:color/black</item>
     </style>
 

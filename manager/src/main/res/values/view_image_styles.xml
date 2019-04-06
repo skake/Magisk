@@ -16,7 +16,7 @@
     </style>
 
     <style name="Widget.Icon.Accent">
-        <item name="tint">@color/colorAccent</item>
+        <item name="tint">@color/colorSecondary</item>
     </style>
 
     <style name="Widget.Icon.DialogButton" parent="Widget.Icon.Accent">
