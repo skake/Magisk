@@ -19,8 +19,10 @@ object MagiskDB {
 @AnyThread
 fun MagiskQuery.query() = query.su()
 
-fun String.su() = Single.just(Shell.su(this))
+fun String.suRaw() = Single.just(Shell.su(this))
     .map { it.exec().out }
+
+fun String.su() = suRaw()
     .map { it.toMap() }
 
 fun List<String>.toMap() = map { it.split(Regex("\\|")) }

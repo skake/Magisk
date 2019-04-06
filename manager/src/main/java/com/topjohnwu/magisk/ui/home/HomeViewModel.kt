@@ -1,19 +1,29 @@
 package com.topjohnwu.magisk.ui.home
 
+import android.content.Context
 import android.os.Handler
 import androidx.core.os.postDelayed
 import com.skoumal.teanity.databinding.ComparableRvItem
 import com.skoumal.teanity.util.DiffObservableList
 import com.skoumal.teanity.util.KObservableField
 import com.topjohnwu.magisk.BR
+import com.topjohnwu.magisk.BuildConfig
+import com.topjohnwu.magisk.Config
+import com.topjohnwu.magisk.data.repository.MagiskRepository
 import com.topjohnwu.magisk.model.entity.SupportItem
 import com.topjohnwu.magisk.model.entity.SupportRvItem
+import com.topjohnwu.magisk.model.observer.Observer
+import com.topjohnwu.magisk.model.version.Version
 import com.topjohnwu.magisk.ui.base.MagiskViewModel
 import com.topjohnwu.magisk.ui.events.ViewEvent
+import com.topjohnwu.magisk.util.assign
 import me.tatarka.bindingcollectionadapter2.OnItemBind
 import kotlin.random.Random
 
-class HomeViewModel : MagiskViewModel() {
+class HomeViewModel(
+    magiskRepo: MagiskRepository,
+    context: Context
+) : MagiskViewModel() {
 
     object SafetyNetState {
         const val UNKNOWN = 0
@@ -21,25 +31,22 @@ class HomeViewModel : MagiskViewModel() {
         const val LOADED = 2
     }
 
-    object VersionState {
-        const val UNKNOWN = 0
-        const val LOADING = 1
-        const val LOADED = 2
+    val magiskCurrentVersion = KObservableField(Version("", -1))
+    val magiskUpdateVersion = KObservableField(Version("", -1))
+    val magiskVersionUpdate = Observer(magiskCurrentVersion, magiskUpdateVersion) {
+        magiskCurrentVersion.value.versionCode < magiskUpdateVersion.value.versionCode
     }
 
-    val magiskVersionUpdate = KObservableField(false)
-    val magiskVersionState = KObservableField(VersionState.LOADING)
-    val magiskVersion = KObservableField("v18.1")
-    val magiskVersionCode = KObservableField(18100)
+    val appPackageName = KObservableField(context.packageName)
+    val appCurrentVersion =
+        KObservableField(Version(BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE))
+    val appUpdateVersion = KObservableField(Version("", -1))
+    val appVersionUpdate = Observer(appCurrentVersion, appUpdateVersion) {
+        appCurrentVersion.value.versionCode < appUpdateVersion.value.versionCode
+    }
 
-    val appVersionUpdate = KObservableField(false)
-    val appVersionState = KObservableField(VersionState.LOADING)
-    val appVersion = KObservableField("v18.1")
-    val appVersionCode = KObservableField(18100)
-    val appPackageName = KObservableField("com.topjohnwu.magisk")
-
-    val isForceEncryption = KObservableField(false /*fetch default*/)
-    val isAVB = KObservableField(false /*fetch default*/)
+    val isForceEncryption = KObservableField(Config.forceEncrypt)
+    val isAVB = KObservableField(Config.keepVerity)
 
     val safetyNetState = KObservableField(SafetyNetState.UNKNOWN)
     val isCTS = KObservableField(false)
@@ -55,15 +62,27 @@ class HomeViewModel : MagiskViewModel() {
     }
 
     init {
-        Handler().postDelayed(2000) {
-            appVersionState.value = VersionState.LOADED
-            appVersionUpdate.value = Random(System.currentTimeMillis()).nextBoolean()
-        }
+        magiskRepo.fetchMagiskVersion()
+            .assign {
+                onSuccess {
+                    magiskCurrentVersion.value = it
+                }
+            }
 
-        Handler().postDelayed(4000) {
-            magiskVersionState.value = VersionState.LOADED
-            magiskVersionUpdate.value = Random(System.currentTimeMillis()).nextBoolean()
-        }
+        magiskRepo.fetchConfig()
+            .applyViewModel(this)
+            .assign {
+                onSuccess {
+                    it.magisk.apply {
+                        val code = versionCode.toIntOrNull() ?: -1
+                        magiskUpdateVersion.value = Version(version, code)
+                    }
+                    it.app.apply {
+                        val code = versionCode.toIntOrNull() ?: BuildConfig.VERSION_CODE
+                        appUpdateVersion.value = Version(version, code)
+                    }
+                }
+            }
     }
 
     fun sheetBackPressed() = ViewEvent.BACK_PRESS.publish()

@@ -2,8 +2,12 @@ package com.topjohnwu.magisk.data.repository
 
 import android.content.Context
 import com.topjohnwu.magisk.Config
+import com.topjohnwu.magisk.data.database.base.suRaw
 import com.topjohnwu.magisk.data.network.GithubRawApiServices
+import com.topjohnwu.magisk.model.version.Version
 import com.topjohnwu.magisk.util.writeToFile
+import io.reactivex.Single
+import io.reactivex.functions.BiFunction
 
 
 class MagiskRepository(
@@ -49,12 +53,31 @@ class MagiskRepository(
         .map { it.writeToFile(context, FILE_BOOTCTL_SH) }
 
 
-    private fun fetchConfig() = when (Config.updateChannel) {
+    fun fetchConfig() = when (Config.updateChannel) {
         Config.UpdateChannel.STABLE -> config
         Config.UpdateChannel.BETA -> configBeta
         Config.UpdateChannel.CANARY -> configCanary
         Config.UpdateChannel.CANARY_DEBUG -> configCanaryDebug
     }
+
+
+    fun fetchMagiskVersion(): Single<Version> = Single.zip(
+        fetchMagiskVersionName(),
+        fetchMagiskVersionCode(),
+        BiFunction { versionName, versionCode ->
+            Version(versionName, versionCode)
+        }
+    )
+
+    private fun fetchMagiskVersionName() = "magisk -v".suRaw()
+        .map { it.first() }
+        .map { it.substring(0 until it.indexOf(":")) }
+        .onErrorReturn { "Unknown" }
+
+    private fun fetchMagiskVersionCode() = "magisk -V".suRaw()
+        .map { it.first() }
+        .map { it.toIntOrNull() ?: -1 }
+        .onErrorReturn { -1 }
 
     companion object {
         const val FILE_MAGISK_ZIP = "magisk.zip"

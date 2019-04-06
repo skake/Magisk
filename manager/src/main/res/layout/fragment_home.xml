@@ -6,8 +6,6 @@
 
     <data>
 
-        <import type="com.topjohnwu.magisk.ui.home.HomeViewModel.VersionState" />
-
         <variable
             name="viewModel"
             type="com.topjohnwu.magisk.ui.home.HomeViewModel" />
@@ -40,7 +38,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
-                    invisible="@{viewModel.magiskVersionState != VersionState.LOADED}"
+                    invisible="@{!viewModel.loaded}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -48,12 +46,12 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/Widget.Text.Emphasize.Tinted"
+                        pulse="@{viewModel.magiskVersionUpdate}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="start"
                         android:text="@{@string/glance_magisk_title(viewModel.magiskVersionUpdate ? @string/update_obsolete : @string/update_current)}"
                         android:textStyle="normal"
-                        pulse="@{viewModel.magiskVersionUpdate}"
                         tools:text="Magisk is up-to-date" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -61,14 +59,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha=".4"
-                        android:text="@{@string/glance_magisk_installed(viewModel.magiskVersion, viewModel.magiskVersionCode)}"
+                        android:text="@{@string/glance_magisk_installed(viewModel.magiskCurrentVersion.version, viewModel.magiskCurrentVersion.versionCode)}"
                         tools:text="Installed: v18.1 (18100)" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.Text.Caption.Tinted"
+                        gone="@{!viewModel.magiskVersionUpdate}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha=".4"
+                        android:text="@{@string/glance_magisk_update_to(viewModel.magiskUpdateVersion.version, viewModel.magiskUpdateVersion.versionCode)}"
+                        tools:text="Update to: v18.1 (18100)" />
 
                 </LinearLayout>
 
                 <ProgressBar
                     style="@style/Widget.Progress"
-                    gone="@{viewModel.magiskVersionState != VersionState.LOADING}"
+                    gone="@{!viewModel.loading}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -78,17 +85,18 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.Button.Text"
-                invisibleTY="@{viewModel.magiskVersionState != VersionState.LOADED}"
+                invisibleTY="@{!viewModel.loaded}"
                 invisibleTYMaxAlpha="@{0.4f}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:alpha=".4"
                 android:onClick="@{() -> viewModel.installMagiskPressed()}"
-                android:text="Install"
+                android:text="@{viewModel.magiskVersionUpdate ? `Update` : `Install`}"
                 android:textColor="@color/colorTextTinted"
                 app:layout_constraintRight_toRightOf="@+id/home_magisk"
-                app:layout_constraintTop_toBottomOf="@+id/home_magisk" />
+                app:layout_constraintTop_toBottomOf="@+id/home_magisk"
+                tools:text="Install" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/home_manager"
@@ -102,7 +110,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
-                    invisible="@{viewModel.appVersionState != VersionState.LOADED}"
+                    invisible="@{!viewModel.loaded}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -110,9 +118,9 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/Widget.Text.Emphasize.Tinted"
+                        pulse="@{viewModel.appVersionUpdate}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        pulse="@{viewModel.appVersionUpdate}"
                         android:text="@{@string/glance_manager_title(viewModel.appVersionUpdate ? @string/update_obsolete : @string/update_current)}"
                         android:textStyle="normal"
                         tools:text="App is up-to-date" />
@@ -122,8 +130,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha=".4"
-                        android:text="@{@string/glance_manager_installed(viewModel.appVersion, viewModel.appVersionCode)}"
+                        android:text="@{@string/glance_manager_installed(viewModel.appCurrentVersion.version, viewModel.appCurrentVersion.versionCode)}"
                         tools:text="Installed: v18.1 (18100)" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.Text.Caption.Tinted"
+                        gone="@{!viewModel.appVersionUpdate}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha=".4"
+                        android:text="@{@string/glance_manager_update_to(viewModel.appUpdateVersion.version, viewModel.appUpdateVersion.versionCode)}"
+                        tools:text="Update to: v18.1 (18100)" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/Widget.Text.Caption.Tinted"
@@ -137,7 +154,7 @@
 
                 <ProgressBar
                     style="@style/Widget.Progress"
-                    gone="@{viewModel.appVersionState != VersionState.LOADING}"
+                    gone="@{!viewModel.loading}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -147,17 +164,18 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.Button.Text"
-                invisibleTY="@{viewModel.appVersionState != VersionState.LOADED}"
+                invisibleTY="@{!viewModel.loaded}"
                 invisibleTYMaxAlpha="@{0.4f}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:alpha=".4"
                 android:onClick="@{() -> viewModel.installManagerPressed()}"
-                android:text="Install"
+                android:text="@{viewModel.appVersionUpdate ? `Update` : `Install`}"
                 android:textColor="@color/colorTextTinted"
                 app:layout_constraintRight_toRightOf="@+id/home_manager"
-                app:layout_constraintTop_toBottomOf="@+id/home_manager" />
+                app:layout_constraintTop_toBottomOf="@+id/home_manager"
+                tools:text="Install" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

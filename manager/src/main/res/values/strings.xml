@@ -14,8 +14,10 @@
 
     <string name="glance_magisk_title">Magisk is %s</string>
     <string name="glance_magisk_installed">Installed: %s (%d)</string>
+    <string name="glance_magisk_update_to">Update to: %s (%d)</string>
     <string name="glance_manager_title">App is %s</string>
     <string name="glance_manager_installed">Installed: %s (%d)</string>
+    <string name="glance_manager_update_to">Update to: %s (%d)</string>
 
     <string name="glance_install">Install</string>
 
