@@ -11,7 +11,7 @@
         android:title="Log" />
     <item
         android:id="@+id/superuserFragment"
-        android:icon="@drawable/ic_superuser"
+        android:icon="@null"
         android:title="Superuser" />
     <item
         android:id="@+id/moduleFragment"
