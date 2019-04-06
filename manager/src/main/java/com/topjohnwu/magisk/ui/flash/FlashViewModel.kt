@@ -10,7 +10,7 @@ import com.skoumal.teanity.util.DiffObservableList
 import com.skoumal.teanity.util.KObservableField
 import com.topjohnwu.magisk.BR
 import com.topjohnwu.magisk.Constants
-import com.topjohnwu.magisk.data.repository.FilesRepository
+import com.topjohnwu.magisk.data.repository.MagiskRepository
 import com.topjohnwu.magisk.model.entity.ConsoleRvItem
 import com.topjohnwu.magisk.model.flash.*
 import com.topjohnwu.magisk.ui.base.MagiskViewModel
@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit
 class FlashViewModel(
     data: FlashActivityArgs,
     private val context: Context,
-    private val filesRepo: FilesRepository
+    private val magiskRepo: MagiskRepository
 ) : MagiskViewModel(), IFlashLog {
 
     val showRestartTitle = KObservableField(false)
@@ -48,13 +48,13 @@ class FlashViewModel(
             FlashAction.FLASH_MAGISK -> FlashManager<ActionCurrentSlot> {
                 context = this@FlashViewModel.context
                 console = this@FlashViewModel
-                magiskDownloader = filesRepo.fetchMagisk()
+                magiskDownloader = magiskRepo.fetchMagisk()
             }
             FlashAction.FLASH_INACTIVE_SLOT -> FlashManager<ActionInactiveSlot> {
                 context = this@FlashViewModel.context
                 console = this@FlashViewModel
-                magiskDownloader = filesRepo.fetchMagisk()
-                bootctlDownloader = filesRepo.fetchBootCtl()
+                magiskDownloader = magiskRepo.fetchMagisk()
+                bootctlDownloader = magiskRepo.fetchBootctl()
             }
             FlashAction.PATCH_BOOT -> FlashManager<ActionPatchBoot> {
                 context = this@FlashViewModel.context

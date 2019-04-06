@@ -39,6 +39,10 @@ class ModuleRepository(
         .fetchModuleZip(module)
         .map { it.writeToFile(context, FILE_INSTALL_ZIP) }
 
+    fun fetchInstaller() = apiRaw
+        .fetchModuleInstaller()
+        .map { it.writeToFile(context, FILE_MODULE_INSTALLER_SH) }
+
 
     private fun fetchProperties(module: String, lastChanged: Long) = apiRaw
         .fetchFile(module, "module.prop")
@@ -58,6 +62,7 @@ class ModuleRepository(
         const val FILE_README_MD = "README.md"
         const val FILE_CONFIG_SH = "config.sh"
         const val FILE_INSTALL_ZIP = "install.zip"
+        const val FILE_MODULE_INSTALLER_SH = "module_installer.sh"
     }
 
 }

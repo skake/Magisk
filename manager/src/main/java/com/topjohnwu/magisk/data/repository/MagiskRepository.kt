@@ -40,6 +40,14 @@ class MagiskRepository(
         .flatMap { apiRaw.fetchFile(it.uninstaller.link) }
         .map { it.writeToFile(context, FILE_UNINSTALLER_ZIP) }
 
+    fun fetchSafetynet() = apiRaw
+        .fetchSafetynet()
+        .map { it.writeToFile(context, FILE_SAFETY_NET_APK) }
+
+    fun fetchBootctl() = apiRaw
+        .fetchBootctl()
+        .map { it.writeToFile(context, FILE_BOOTCTL_SH) }
+
 
     private fun fetchConfig() = when (Config.updateChannel) {
         Config.UpdateChannel.STABLE -> config
@@ -52,6 +60,8 @@ class MagiskRepository(
         const val FILE_MAGISK_ZIP = "magisk.zip"
         const val FILE_MAGISK_APK = "magisk.apk"
         const val FILE_UNINSTALLER_ZIP = "uninstaller.zip"
+        const val FILE_SAFETY_NET_APK = "safetynet.apk"
+        const val FILE_BOOTCTL_SH = "bootctl"
     }
 
 }

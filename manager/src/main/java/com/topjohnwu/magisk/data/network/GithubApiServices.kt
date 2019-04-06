@@ -10,9 +10,9 @@ interface GithubApiServices {
 
     @GET("users/Magisk-Modules-Repo/repos")
     fun fetchRepos(
-        @Query("page") page: Int, @Query("per_page") count: Int = REPOS_PER_PAGE, @Query(
-            "sort"
-        ) sortOrder: String = "pushed"
+        @Query("page") page: Int,
+        @Query("per_page") count: Int = REPOS_PER_PAGE,
+        @Query("sort") sortOrder: String = "pushed"
     ): Single<List<GithubRepo>>
 
     companion object {
