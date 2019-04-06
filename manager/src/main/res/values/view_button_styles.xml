@@ -53,4 +53,8 @@
         <item name="iconTint">@color/colorSecondary</item>
     </style>
 
+    <style name="Widget.FAB" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="tint">@color/colorTextInverse</item>
+    </style>
+
 </resources>

@@ -41,6 +41,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/Widget.FAB"
             android:onClick="@{() -> viewModel.superuserPressed()}"
             android:tint="@android:color/white"
             app:fabSize="normal"

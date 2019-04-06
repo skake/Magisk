@@ -9,6 +9,7 @@
 
     <color name="colorText">#1D1D1D</color>
     <color name="colorTextInactive">#6a6868</color>
+    <color name="colorTextInverse">#fff</color>
 
     <color name="colorTextTinted">#FFFFFF</color>
     <color name="colorCardStroke">#2AFFFFFF</color>
