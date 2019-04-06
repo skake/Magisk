@@ -41,13 +41,11 @@ ui_print "************************"
 ui_print "* Magisk v$MAGISK_VER Installer"
 ui_print "************************"
 
-is_mounted /data || mount /data || is_mounted /cache || mount /cache || abort "! Unable to mount partitions"
+is_mounted /data || mount /data || is_mounted /cache || mount /cache
 mount_partitions
-
-find_boot_image
-
 check_data
 get_flags
+find_boot_image
 
 [ -z $BOOTIMAGE ] && abort "! Unable to detect target image"
 ui_print "- Target image: $BOOTIMAGE"
