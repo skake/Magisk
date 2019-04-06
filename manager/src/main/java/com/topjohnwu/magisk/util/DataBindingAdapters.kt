@@ -103,8 +103,16 @@ fun setInvisibleWithTranslationY(view: View, isInvisible: Boolean, _maxAlpha: Fl
 
 @BindingAdapter("pulse")
 fun setPulse(view: View, shouldPulse: Boolean) {
+    fun clearAnimation() {
+        (view.tag as? ObjectAnimator)?.cancel()
+        view.tag = null
+    }
+
     if (!shouldPulse) {
         view.clearAnimation()
+
+        clearAnimation()
+
         return
     }
 
@@ -114,6 +122,10 @@ fun setPulse(view: View, shouldPulse: Boolean) {
             repeatMode = ObjectAnimator.REVERSE
             duration = 1000
             interpolator = FastOutSlowInInterpolator()
+
+            clearAnimation()
+
+            view.tag = this
         }
         .start()
 }
