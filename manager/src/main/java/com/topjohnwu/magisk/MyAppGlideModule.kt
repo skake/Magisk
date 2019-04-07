@@ -22,7 +22,7 @@ class MyAppGlideModule : AppGlideModule() {
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
         val interceptor = HttpLoggingInterceptor()
 
-        if (Constants.DEBUG || Constants.ALPHA) {
+        if (Constants.DEBUG) {
             interceptor.level = HttpLoggingInterceptor.Level.NONE
         } else {
             interceptor.level = HttpLoggingInterceptor.Level.NONE
@@ -38,7 +38,7 @@ class MyAppGlideModule : AppGlideModule() {
     }
 
     override fun applyOptions(context: Context, builder: GlideBuilder) {
-        if (Constants.DEBUG || Constants.ALPHA) {
+        if (Constants.DEBUG) {
             builder.setLogLevel(Log.VERBOSE)
         }
 

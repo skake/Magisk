@@ -85,11 +85,13 @@ dependencies {
     def vRoom = "2.1.0-alpha05"
     def vWork = "2.0.0"
     def vPreference = "1.1.0-alpha04"
+    def vTabs = "1.0.0"
     implementation group: "com.google.android.material", name: "material", version: vMaterial
     implementation group: "androidx.constraintlayout", name: "constraintlayout", version: vConstraint
     implementation group: "androidx.room", name: "room-rxjava2", version: vRoom
     implementation group: "androidx.work", name: "work-runtime-ktx", version: vWork
     implementation group: "androidx.preference", name: "preference", version: vPreference, ext: "aar"
+    implementation group: "androidx.browser", name: "browser", version: vTabs
 
     // DEPENDENCY INJECTION
     def vKoin = "2.0.0-beta-1"

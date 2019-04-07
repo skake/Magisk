@@ -17,6 +17,7 @@ import com.topjohnwu.magisk.model.version.Version
 import com.topjohnwu.magisk.ui.base.MagiskViewModel
 import com.topjohnwu.magisk.ui.events.ViewEvent
 import com.topjohnwu.magisk.util.assign
+import com.topjohnwu.magisk.util.launch
 import me.tatarka.bindingcollectionadapter2.OnItemBind
 import kotlin.random.Random
 
@@ -86,10 +87,14 @@ class HomeViewModel(
     }
 
     fun sheetBackPressed() = ViewEvent.BACK_PRESS.publish()
-    fun uninstallPressed() {}
+
     fun installMagiskPressed() {}
+
     fun installManagerPressed() {}
-    fun supportPressed(item: SupportItem) {}
+
+    fun supportPressed(item: SupportItem) = item.url.launch()
+
+    fun uninstallPressed() {}
 
     fun verifyPressed() {
         safetyNetState.value = SafetyNetState.LOADING

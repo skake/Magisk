@@ -8,19 +8,6 @@ import java.io.File
 object Constants {
 
     const val DEBUG = BuildConfig.BUILD_TYPE == "debug"
-    const val ALPHA = BuildConfig.BUILD_TYPE == "alpha"
-    const val BETA = BuildConfig.BUILD_TYPE == "beta"
-    const val RELEASE = BuildConfig.BUILD_TYPE == "release"
-
-    private const val API_URL_ALPHA = "https://example.com"
-    private const val API_URL_BETA = "https://example.com"
-    private const val API_URL_RELEASE = "https://example.com"
-
-    val API_URL = when {
-        RELEASE -> API_URL_RELEASE
-        BETA -> API_URL_BETA
-        else -> API_URL_ALPHA
-    }
 
     // APK content
     val ANDROID_MANIFEST = "AndroidManifest.xml"

@@ -14,6 +14,7 @@ object Config : KotprefModel() {
     var bootFormat by stringPref("img", "bootFormat")
     var suLogTimeout by longPref(0, "suLogTimeout")
     private var internalUpdateChannel by stringPref(STABLE.toString(), "updateChannel")
+    var useCustomTabs by booleanPref(true, "useCustomTabs")
 
     var updateChannel: UpdateChannel
         get() = valueOf(internalUpdateChannel)
@@ -24,6 +25,7 @@ object Config : KotprefModel() {
     val isStable get() = !(isCanary || isBeta)
     val isCanary get() = updateChannel == CANARY || updateChannel == CANARY_DEBUG
     val isBeta get() = updateChannel == BETA
+
 
     enum class UpdateChannel {
         STABLE, BETA, CANARY, CANARY_DEBUG
