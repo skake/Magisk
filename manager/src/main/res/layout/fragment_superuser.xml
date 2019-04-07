@@ -37,22 +37,30 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/superuser_glance_requests"
-                dividerAfterLast="@{false}"
+                dividerAfterLast="@{true}"
                 dividerColor="@{@android:color/transparent}"
-                dividerHorizontal="@{true}"
-                dividerSize="@{@dimen/margin_generic_half}"
+                dividerSize="@{@dimen/margin_generic}"
                 itemBinding="@{viewModel.itemBinding}"
                 items="@{viewModel.items}"
                 android:layout_width="match_parent"
-                android:scrollbars="none"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:clipToPadding="false"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:padding="@dimen/margin_generic"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:scrollbars="none"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/superuser_glance_requests_title"
+                app:layout_constraintHeight_default="wrap"
+                app:spanCount="2"
                 tools:listitem="@layout/item_superuser_request" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_generic"
+                android:background="@drawable/bg_gradient_primary"
+                android:rotation="180"
+                app:layout_constraintTop_toTopOf="@+id/superuser_glance_requests" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

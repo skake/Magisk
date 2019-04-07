@@ -2,6 +2,8 @@ package com.topjohnwu.magisk.ui.superuser
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isInvisible
+import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.topjohnwu.magisk.R
@@ -27,10 +29,11 @@ class SuperuserFragment : MagiskFragment<SuperuserViewModel, FragmentSuperuserBi
     }
 
     private fun setUpSheet() {
-        binding.superuserParent.addOnGlobalLayoutListener {
-            with(binding) {
-                val offset = superuserParent.measuredHeight - superuserGlance.bottom
+        binding.superuserSheetInclude.superuserSheetPeek.addOnGlobalLayoutListener {
+            with(binding.superuserSheetInclude) {
+                val offset = superuserSheetPeek.measuredHeight
                 bottomSheet.peekHeight = max(100, offset)
+                binding.superuserGlance.updatePadding(bottom = bottomSheet.peekHeight)
             }
         }
     }
@@ -46,8 +49,9 @@ class SuperuserFragment : MagiskFragment<SuperuserViewModel, FragmentSuperuserBi
 
             override fun onSlide(view: View, fraction: Float) {
                 with(binding.superuserSheetInclude) {
-                    sheetInternalLayout.translationY =
-                        sheetAppbar.measuredHeight * (fraction - 1)
+                    sheetInternalLayout.translationY = sheetAppbar.measuredHeight * (fraction - 1)
+                    sheetInternalLayout.isInvisible = fraction == 0f
+                    superuserSheetPeek.isInvisible = fraction != 0f
                 }
             }
 

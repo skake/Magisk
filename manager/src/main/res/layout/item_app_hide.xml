@@ -31,7 +31,6 @@
             app:cardPreventCornerOverlap="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                alphaAnimated="@{item.shouldHide ? 1f : .14f}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
@@ -43,11 +42,9 @@
                     style="@style/Widget.Icon.Large"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:layout_margin="@dimen/margin_generic"
                     android:background="@android:color/transparent"
                     android:src="@{item.item.icon}"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@tools:sample/avatars" />
 
@@ -57,15 +54,18 @@
                     selected="@{viewModel.isIdling}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_generic"
+                    android:layout_marginLeft="@dimen/margin_generic"
+                    android:layout_marginRight="@dimen/margin_generic"
                     android:ellipsize="marquee"
-                    android:gravity="center"
+                    android:gravity="start"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:singleLine="true"
                     android:text="@{item.item.name}"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/hide_app_icon"
+                    app:layout_constraintBottom_toTopOf="@+id/hide_app_package"
+                    app:layout_constraintLeft_toRightOf="@+id/hide_app_icon"
+                    app:layout_constraintRight_toLeftOf="@+id/hide_app_divider"
+                    app:layout_constraintTop_toTopOf="@+id/hide_app_icon"
+                    app:layout_constraintVertical_chainStyle="packed"
                     tools:text="Magisk Manager" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -75,14 +75,44 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
-                    android:gravity="center"
+                    android:gravity="start"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:singleLine="true"
                     android:text="@{item.item.packageName}"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/hide_app_icon"
+                    app:layout_constraintLeft_toLeftOf="@+id/hide_app_title"
+                    app:layout_constraintRight_toRightOf="@+id/hide_app_title"
                     app:layout_constraintTop_toBottomOf="@+id/hide_app_title"
                     tools:text="com.topjohnwu.magisk" />
+
+                <View
+                    android:id="@+id/hide_app_divider"
+                    style="@style/Widget.Divider.Vertical"
+                    invisible="@{!item.hasServices}"
+                    android:layout_marginRight="@dimen/margin_generic"
+                    app:layout_constraintBottom_toBottomOf="@+id/hide_app_icon"
+                    app:layout_constraintRight_toLeftOf="@+id/hide_app_button_expand"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/hide_app_button_expand"
+                    style="@style/Widget.Icon"
+                    invisible="@{!item.hasServices}"
+                    android:onClick="@{() -> item.toggle()}"
+                    app:layout_constraintBottom_toBottomOf="@+id/hide_app_icon"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/hide_app_icon"
+                    app:srcCompat="@drawable/ic_expand" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    gone="@{!item.isExpanded}"
+                    itemBinding="@{viewModel.itemBinding}"
+                    items="@{item.itemsServices}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_generic"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintTop_toBottomOf="@+id/hide_app_icon" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

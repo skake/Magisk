@@ -16,7 +16,35 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         android:background="@drawable/bg_sheet">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/superuser_sheet_peek"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/superuser_sheet_peek_icon_left"
+                style="@style/Widget.Icon"
+                android:layout_marginStart="@dimen/margin_generic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_chevron_up"
+                app:tint="@color/colorTextInactive" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/superuser_sheet_peek_icon_right"
+                style="@style/Widget.Icon"
+                android:layout_marginEnd="@dimen/margin_generic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_chevron_up"
+                app:tint="@color/colorTextInactive" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/sheet_internal_layout"
@@ -55,15 +83,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/margin_generic_half"
                 android:paddingTop="@dimen/margin_generic"
                 android:paddingRight="@dimen/margin_generic_half"
                 android:paddingBottom="@dimen/margin_generic"
                 android:scrollbars="none"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                app:spanCount="2"
                 tools:listitem="@layout/item_app_hide" />
 
             <ProgressBar

@@ -7,6 +7,7 @@ import com.skoumal.teanity.util.ComparableCallback
 import com.skoumal.teanity.util.DiffObservableList
 import com.skoumal.teanity.util.KObservableField
 import com.topjohnwu.magisk.R
+import com.topjohnwu.magisk.model.observer.ListObserver
 import com.topjohnwu.magisk.util.toggle
 
 class LoadingRvItem(
@@ -78,7 +79,14 @@ class AppHideRvItem(val item: AppItem) : ComparableRvItem<AppHideRvItem>() {
 
     override val layoutRes: Int = R.layout.item_app_hide
 
+    val isExpanded = KObservableField(false)
     val shouldHide = KObservableField(item.shouldHide)
+    val itemsServices = DiffObservableList(ComparableRvItem.callback)
+    val hasServices = ListObserver(itemsServices) {
+        itemsServices.isNotEmpty()
+    }
+
+    fun toggle() = isExpanded.toggle()
 
     override fun contentSameAs(other: AppHideRvItem): Boolean = false
     override fun itemSameAs(other: AppHideRvItem): Boolean = false
