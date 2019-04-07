@@ -49,8 +49,8 @@
                 dividerAfterLast="@{false}"
                 dividerColor="@{@android:color/transparent}"
                 dividerSize="@{@dimen/margin_generic}"
+                gone="@{!viewModel.appsLoaded}"
                 itemBinding="@{viewModel.itemBinding}"
-                android:scrollbars="none"
                 items="@{viewModel.itemsApps}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -60,10 +60,18 @@
                 android:paddingTop="@dimen/margin_generic"
                 android:paddingRight="@dimen/margin_generic_half"
                 android:paddingBottom="@dimen/margin_generic"
+                android:scrollbars="none"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:spanCount="2"
                 tools:listitem="@layout/item_app_hide" />
+
+            <ProgressBar
+                style="@style/Widget.Progress"
+                gone="@{!viewModel.appsLoading}"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="100dp" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -9,9 +9,12 @@ import com.topjohnwu.magisk.model.entity.AppHideRvItem
 import com.topjohnwu.magisk.model.entity.AppItem
 import com.topjohnwu.magisk.model.entity.RootRequestItem
 import com.topjohnwu.magisk.model.entity.SuperuserRequestRvItem
+import com.topjohnwu.magisk.model.observer.Observer
 import com.topjohnwu.magisk.ui.base.MagiskViewModel
 import com.topjohnwu.magisk.ui.events.ViewEvent
+import com.topjohnwu.magisk.util.assign
 import com.topjohnwu.magisk.util.findAppLabel
+import io.reactivex.Single
 import me.tatarka.bindingcollectionadapter2.OnItemBind
 import kotlin.random.Random
 
@@ -38,26 +41,40 @@ class SuperuserViewModel(
         }.map { SuperuserRequestRvItem(it) }
         update(newItems)
     }
-    val itemsApps = DiffObservableList(ComparableRvItem.callback).apply {
-        val r = Random(System.currentTimeMillis())
-        val newItems = packageManager.getInstalledApplications(0)
+    val itemsApps = DiffObservableList(ComparableRvItem.callback)
+    val itemBinding = OnItemBind<ComparableRvItem<*>> { itemBinding, _, item ->
+        item.bind(itemBinding)
+        itemBinding.bindExtra(BR.viewModel, this@SuperuserViewModel)
+    }
+
+    private val appsState = KObservableField(State.LOADING)
+    val appsLoaded = Observer(appsState) { appsState.value == State.LOADED }
+    val appsLoadingFailed = Observer(appsState) { appsState.value == State.LOADING_FAILED }
+    val appsLoading = Observer(appsState) { appsState.value == State.LOADING }
+
+    init {
+        Single.fromCallable { packageManager.getInstalledApplications(0) }
+            .flattenAsFlowable { it }
             .filter { it.enabled }
             .map {
                 AppItem(
                     it.findAppLabel(packageManager),
                     it.packageName.orEmpty(),
                     it.loadIcon(packageManager),
-                    r.nextBoolean()
+                    false //fixme this should be fetched
                 )
             }
-            .sortedBy { it.name }
             .map { AppHideRvItem(it) }
-        update(newItems)
+            .toList()
+            .map { it.sortedBy { it.item.name } }
+            .doOnSubscribe { appsState.value = State.LOADING }
+            .doOnSuccess { appsState.value = State.LOADED }
+            .doOnError { appsState.value = State.LOADING_FAILED }
+            .assign {
+                onSuccess { itemsApps.update(it) }
+            }
     }
-    val itemBinding = OnItemBind<ComparableRvItem<*>> { itemBinding, _, item ->
-        item.bind(itemBinding)
-        itemBinding.bindExtra(BR.viewModel, this@SuperuserViewModel)
-    }
+
 
     fun sheetBackPressed() = ViewEvent.BACK_PRESS.publish()
 
