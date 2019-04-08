@@ -14,6 +14,11 @@ data class MagiskLog(
     val date: Date
 )
 
+data class WrappedMagiskLog(
+    val time: Long,
+    val items: List<MagiskLog>
+)
+
 fun Map<String, String>.toLog(): MagiskLog {
     return MagiskLog(
         fromUid = get("from_uid")?.toIntOrNull() ?: -1,

@@ -3,17 +3,21 @@ package com.topjohnwu.magisk.ui.log
 import androidx.databinding.ObservableArrayList
 import com.skoumal.teanity.databinding.ComparableRvItem
 import com.topjohnwu.magisk.BR
-import com.topjohnwu.magisk.model.entity.LogLineRvItem
+import com.topjohnwu.magisk.data.repository.LogRepository
+import com.topjohnwu.magisk.model.entity.ConsoleRvItem
 import com.topjohnwu.magisk.model.entity.LogPage
 import com.topjohnwu.magisk.model.entity.LogRvItem
 import com.topjohnwu.magisk.model.entity.MagiskPage
 import com.topjohnwu.magisk.ui.base.MagiskViewModel
 import com.topjohnwu.magisk.ui.events.ViewEvent
+import com.topjohnwu.magisk.util.assign
 import me.tatarka.bindingcollectionadapter2.BindingViewPagerAdapter
 import me.tatarka.bindingcollectionadapter2.OnItemBind
 
 
-class LogViewModel : MagiskViewModel(), BindingViewPagerAdapter.PageTitles<ComparableRvItem<*>> {
+class LogViewModel(
+    private val logRepo: LogRepository
+) : MagiskViewModel(), BindingViewPagerAdapter.PageTitles<ComparableRvItem<*>> {
 
     val pages = ObservableArrayList<ComparableRvItem<*>>()
     val itemBinding = OnItemBind<ComparableRvItem<*>> { itemBinding, _, item ->
@@ -28,14 +32,26 @@ class LogViewModel : MagiskViewModel(), BindingViewPagerAdapter.PageTitles<Compa
         pages.add(LogPage())
         pages.add(MagiskPage())
 
-        val logEntries = (0 until 5).map { LogLineRvItem() }
-        val logLines = (0..10).map {
-            LogRvItem().apply {
-                items.addAll(logEntries)
+        logRepo.fetchLogs()
+            .flattenAsFlowable { it }
+            .map { LogRvItem(it) }
+            .toList()
+            .applyViewModel(this)
+            .assign {
+                onSuccess {
+                    log.items.update(it)
+                }
             }
-        }
 
-        log.items.addAll(logLines)
+        logRepo.fetchMagiskLogs()
+            .flattenAsFlowable { it }
+            .map { ConsoleRvItem(it) }
+            .toList()
+            .assign {
+                onSuccess {
+                    magisk.items.update(it)
+                }
+            }
     }
 
     override fun getPageTitle(position: Int, item: ComparableRvItem<*>?) = when (item) {

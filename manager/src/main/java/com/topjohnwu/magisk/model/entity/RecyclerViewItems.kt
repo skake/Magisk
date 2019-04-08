@@ -1,6 +1,5 @@
 package com.topjohnwu.magisk.model.entity
 
-import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
 import com.skoumal.teanity.databinding.ComparableRvItem
 import com.skoumal.teanity.util.ComparableCallback
@@ -103,10 +102,10 @@ class LogPage : ComparableRvItem<LogPage>() {
     override fun itemSameAs(other: LogPage): Boolean = false
 }
 
-class LogRvItem : ComparableRvItem<LogRvItem>() {
+class LogRvItem(val item: WrappedMagiskLog) : ComparableRvItem<LogRvItem>() {
     override val layoutRes: Int = R.layout.item_log
 
-    val items = ObservableArrayList<ComparableRvItem<*>>()
+    val items = item.items.map { LogLineRvItem(it) }
     val isExpanded = KObservableField(false)
 
     fun toggle() = isExpanded.toggle()
@@ -115,7 +114,7 @@ class LogRvItem : ComparableRvItem<LogRvItem>() {
     override fun itemSameAs(other: LogRvItem): Boolean = false
 }
 
-class LogLineRvItem : ComparableRvItem<LogLineRvItem>() {
+class LogLineRvItem(val item: MagiskLog) : ComparableRvItem<LogLineRvItem>() {
     override val layoutRes: Int = R.layout.item_log_line
 
     override fun contentSameAs(other: LogLineRvItem): Boolean = false
@@ -123,6 +122,8 @@ class LogLineRvItem : ComparableRvItem<LogLineRvItem>() {
 }
 
 class MagiskPage : ComparableRvItem<LogPage>() {
+
+    val items = DiffObservableList(ComparableRvItem.callback)
 
     override val layoutRes: Int = R.layout.page_magisk
 

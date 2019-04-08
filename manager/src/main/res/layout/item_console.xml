@@ -2,6 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="item"
+            type="com.topjohnwu.magisk.model.entity.ConsoleRvItem" />
+
+        <variable
+            name="viewModel"
+            type="Object" />
+
+    </data>
+
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/Widget.Text.Caption"
         android:layout_width="match_parent"
@@ -11,17 +23,5 @@
         android:textColor="@android:color/white"
         android:textSize="10sp"
         tools:text="Installing whatever wherever..." />
-
-    <data>
-
-        <variable
-            name="item"
-            type="com.topjohnwu.magisk.model.entity.ConsoleRvItem" />
-
-        <variable
-            name="viewModel"
-            type="com.topjohnwu.magisk.ui.flash.FlashViewModel" />
-
-    </data>
 
 </layout>
