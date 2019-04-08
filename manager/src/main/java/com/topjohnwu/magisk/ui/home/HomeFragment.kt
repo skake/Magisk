@@ -7,7 +7,6 @@ import com.topjohnwu.magisk.R
 import com.topjohnwu.magisk.databinding.FragmentHomeBinding
 import com.topjohnwu.magisk.ui.base.MagiskFragment
 import com.topjohnwu.magisk.util.setOnViewReadyListener
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.viewModel
 import kotlin.math.max
 
@@ -21,7 +20,6 @@ class HomeFragment : MagiskFragment<HomeViewModel, FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val shit: Any by inject()
         setUpSheet()
         setUpSheetLayout()
     }
