@@ -17,6 +17,7 @@
 
     <HorizontalScrollView
         android:layout_width="match_parent"
+        android:background="@android:color/black"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -24,7 +25,6 @@
             items="@{item.items}"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@android:color/black"
             android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingBottom="40dp"
