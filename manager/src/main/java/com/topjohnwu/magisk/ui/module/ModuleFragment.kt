@@ -29,7 +29,7 @@ class ModuleFragment : MagiskFragment<ModuleViewModel, FragmentModuleBinding>() 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
-            Constants.ID.FETCH_ZIP -> navigateToFlash(data?.data)
+            Constants.ID.FETCH_ZIP -> viewModel.navigateToFlash(data?.data ?: return)
         }
     }
 
@@ -78,8 +78,7 @@ class ModuleFragment : MagiskFragment<ModuleViewModel, FragmentModuleBinding>() 
 
             override fun onSlide(view: View, fraction: Float) {
                 with(binding.moduleSheetInclude) {
-                    sheetInternalLayout.translationY =
-                        sheetAppbar.measuredHeight * (fraction - 1)
+                    sheetInternalLayout.translationY = sheetAppbar.measuredHeight * (fraction - 1)
                 }
             }
 
@@ -92,7 +91,7 @@ class ModuleFragment : MagiskFragment<ModuleViewModel, FragmentModuleBinding>() 
     }
     //endregion
 
-    private fun navigateToFlash(data: Uri?) {
+    private fun navigateToFlash(data: Uri) {
         val directions = ModuleFragmentDirections
             .flashActivity(FlashAction.FLASH_ZIP, data.toString())
         navController.navigate(directions)

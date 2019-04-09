@@ -5,7 +5,10 @@ import androidx.core.os.bundleOf
 import com.skoumal.teanity.viewmodel.LoadingViewModel
 import com.topjohnwu.magisk.R
 import com.topjohnwu.magisk.databinding.ActivityFlashBinding
+import com.topjohnwu.magisk.model.navigation.action
+import com.topjohnwu.magisk.model.navigation.data
 import com.topjohnwu.magisk.ui.base.MagiskActivity
+import com.topjohnwu.magisk.util.directions.FlashAction
 import org.koin.androidx.viewmodel.ext.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -14,7 +17,10 @@ class FlashActivity : MagiskActivity<FlashViewModel, ActivityFlashBinding>() {
 
     override val layoutRes: Int = R.layout.activity_flash
     override val viewModel: FlashViewModel by viewModel {
-        val args = FlashActivityArgs.fromBundle(intent?.extras ?: bundleOf())
+        val bundle = intent?.extras ?: bundleOf()
+        val action = bundle.action ?: FlashAction.DIE
+        val data = bundle.data
+        val args = FlashActivityArgs.Builder(action, data).build()
         parametersOf(args)
     }
 

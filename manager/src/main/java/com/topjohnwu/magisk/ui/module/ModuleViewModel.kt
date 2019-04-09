@@ -1,13 +1,16 @@
 package com.topjohnwu.magisk.ui.module
 
+import android.net.Uri
 import com.skoumal.teanity.databinding.ComparableRvItem
 import com.skoumal.teanity.util.DiffObservableList
 import com.topjohnwu.magisk.BR
 import com.topjohnwu.magisk.model.entity.ModuleInstalledRvItem
 import com.topjohnwu.magisk.model.entity.ModuleItem
 import com.topjohnwu.magisk.model.entity.ModuleRvItem
+import com.topjohnwu.magisk.model.navigation.Navigation
 import com.topjohnwu.magisk.ui.base.MagiskViewModel
 import com.topjohnwu.magisk.ui.events.ViewEvent
+import com.topjohnwu.magisk.util.directions.FlashAction
 import me.tatarka.bindingcollectionadapter2.OnItemBind
 import kotlin.random.Random
 
@@ -56,5 +59,7 @@ class ModuleViewModel : MagiskViewModel() {
     fun modulePressed(item: ModuleRvItem) = Unit
     fun installPressed(item: ModuleRvItem) = Unit
     fun installExternalPressed() = ViewEvent.NAVIGATION_INSTALL_EXT_MODULE.publish()
+
+    fun navigateToFlash(data: Uri?) = Navigation.flash(FlashAction.PATCH_BOOT, data).publish()
 
 }

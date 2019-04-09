@@ -8,7 +8,8 @@ enum class FlashAction : Parcelable {
 
     FLASH_ZIP, FLASH_MAGISK, FLASH_INACTIVE_SLOT,
     PATCH_BOOT,
-    UNINSTALL;
+    UNINSTALL,
+    DIE;
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)

@@ -13,6 +13,7 @@ import com.topjohnwu.magisk.Constants
 import com.topjohnwu.magisk.data.repository.MagiskRepository
 import com.topjohnwu.magisk.model.entity.ConsoleRvItem
 import com.topjohnwu.magisk.model.flash.*
+import com.topjohnwu.magisk.model.navigation.Navigation
 import com.topjohnwu.magisk.ui.base.MagiskViewModel
 import com.topjohnwu.magisk.ui.events.ViewEvent
 import com.topjohnwu.magisk.util.*
@@ -65,6 +66,10 @@ class FlashViewModel(
                 context = this@FlashViewModel.context
                 console = this@FlashViewModel
                 source = data.data.orEmpty().toUri()
+            }
+            else -> {
+                Navigation.back().publish()
+                Single.just(FlashManager.Result(false))
             }
         }
 
